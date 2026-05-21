@@ -3,6 +3,7 @@
 import { useState, useEffect, useRef } from "react";
 import { useParams } from "next/navigation";
 import Link from "next/link";
+import Image from "next/image";
 import {
   motion,
   useScroll,
@@ -165,11 +166,19 @@ function TopBar() {
         {/* Logo */}
         <motion.a
           href="/"
-          whileHover={{ letterSpacing: "0.35em" }}
-          transition={{ duration: 0.6 }}
-          className="text-[#E3E3DB] text-xl font-light tracking-[0.3em]"
+          whileHover={{ opacity: 0.8 }}
+          transition={{ duration: 0.4 }}
+          className="flex items-center"
         >
-          SÜSEL<span className="text-[#0243C7]">İ</span>
+          <Image
+            src="/logo.png"
+            alt="SÜSELİ"
+            width={160}
+            height={44}
+            priority
+            unoptimized
+            style={{ height: "36px", width: "auto", objectFit: "contain", display: "block" }}
+          />
         </motion.a>
 
         {/* WhatsApp pill */}

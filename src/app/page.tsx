@@ -27,6 +27,31 @@ interface AdminProduct {
 }
 const ADMIN_STORAGE_KEY = "suseli_admin_products";
 
+// ── Site settings (written by admin panel) ────────────────────────────────
+const SETTINGS_KEY = "suseli_site_settings";
+
+interface SiteSettings {
+  siteName: string;
+  heroTitle: string;
+  heroSubtitle: string;
+  whatsapp: string;
+  instagram: string;
+  email: string;
+  footerText: string;
+  logo: string | null;
+}
+
+const DEFAULT_SETTINGS: SiteSettings = {
+  siteName:     "SÜSELİ",
+  heroTitle:    "ZAMANSIZ",
+  heroSubtitle: "TASARIM",
+  whatsapp:     "905555555555",
+  instagram:    "https://instagram.com/suseli.studio",
+  email:        "atelier@suseli.com",
+  footerText:   "İstanbul merkezli, mimari oranlarda parça üreten yaratıcı stüdyo. Her tasarım atölyemizde ellerimizle hayata geçer.",
+  logo:         null,
+};
+
 // ============================================================
 // SÜSELİ Creative Studio — Ultra Premium Catalog Homepage
 // Brand Palette: #E3E3DB (cream)  #0243C7 (cobalt)  #2B2B2B (graphite)
@@ -122,7 +147,15 @@ const instagramPosts = [
 // ============================================================
 // Navigation
 // ============================================================
-function Navigation() {
+function Navigation({
+  logo,
+  siteName,
+  whatsapp,
+}: {
+  logo: string | null;
+  siteName: string;
+  whatsapp: string;
+}) {
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
 
@@ -145,12 +178,29 @@ function Navigation() {
     >
       <div className="max-w-[1600px] mx-auto px-6 md:px-12 py-5 flex items-center justify-between">
         <motion.a
-          href="#"
-          whileHover={{ letterSpacing: "0.35em" }}
-          transition={{ duration: 0.6 }}
-          className="text-[#E3E3DB] text-xl md:text-2xl font-light tracking-[0.3em]"
+          href="/"
+          whileHover={{ opacity: 0.8 }}
+          transition={{ duration: 0.4 }}
+          className="flex items-center"
         >
-          SÜSEL<span className="text-[#0243C7]">İ</span>
+          {logo ? (
+            // eslint-disable-next-line @next/next/no-img-element
+            <img
+              src={logo}
+              alt={siteName}
+              style={{ height: "36px", width: "auto", objectFit: "contain", display: "block" }}
+            />
+          ) : (
+            <Image
+              src="/logo.png"
+              alt={siteName}
+              width={160}
+              height={44}
+              priority
+              unoptimized
+              style={{ height: "36px", width: "auto", objectFit: "contain", display: "block" }}
+            />
+          )}
         </motion.a>
 
         <div className="hidden md:flex items-center gap-10">
@@ -170,7 +220,7 @@ function Navigation() {
         </div>
 
         <motion.a
-          href="https://wa.me/905555555555"
+          href={`https://wa.me/${whatsapp}`}
           whileHover={{ scale: 1.04 }}
           whileTap={{ scale: 0.98 }}
           className="hidden md:flex items-center gap-2 px-5 py-2.5 rounded-full bg-[#E3E3DB]/[0.04] border border-[#E3E3DB]/10 backdrop-blur-xl text-[#E3E3DB] text-xs tracking-[0.2em] uppercase"
@@ -220,7 +270,7 @@ function Navigation() {
 // ============================================================
 // Hero Section
 // ============================================================
-function Hero() {
+function Hero({ title, subtitle }: { title: string; subtitle: string }) {
   const containerRef = useRef<HTMLDivElement>(null);
   const { scrollYProgress } = useScroll({
     target: containerRef,
@@ -231,8 +281,8 @@ function Hero() {
   const opacity = useTransform(scrollYProgress, [0, 0.8], [1, 0]);
   const scale = useTransform(scrollYProgress, [0, 1], [1, 1.15]);
 
-  const text = "ZAMANSIZ".split("");
-  const subtext = "TASARIM".split("");
+  const text = (title || "ZAMANSIZ").split("");
+  const subtext = (subtitle || "TASARIM").split("");
 
   return (
     <section
@@ -1000,7 +1050,7 @@ function About() {
 // ============================================================
 // WhatsApp CTA
 // ============================================================
-function WhatsAppCTA() {
+function WhatsAppCTA({ whatsapp, email }: { whatsapp: string; email: string }) {
   const ref = useRef(null);
   const inView = useInView(ref, { once: true, amount: 0.3 });
 
@@ -1068,7 +1118,7 @@ function WhatsAppCTA() {
           <motion.a
             whileHover={{ scale: 1.03 }}
             whileTap={{ scale: 0.98 }}
-            href="https://wa.me/905555555555"
+            href={`https://wa.me/${whatsapp}`}
             className="group flex items-center gap-4 px-8 py-5 rounded-full bg-[#E3E3DB] text-[#0243C7] text-sm tracking-[0.2em] uppercase font-medium"
           >
             <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
@@ -1081,10 +1131,10 @@ function WhatsAppCTA() {
           <motion.a
             whileHover={{ scale: 1.03 }}
             whileTap={{ scale: 0.98 }}
-            href="mailto:atelier@suseli.com"
+            href={`mailto:${email}`}
             className="flex items-center gap-3 px-8 py-5 rounded-full border border-[#E3E3DB]/30 text-[#E3E3DB] text-sm tracking-[0.2em] uppercase backdrop-blur-xl"
           >
-            atelier@suseli.com
+            {email}
           </motion.a>
         </motion.div>
       </div>
@@ -1095,7 +1145,7 @@ function WhatsAppCTA() {
 // ============================================================
 // Instagram Showcase
 // ============================================================
-function Instagram() {
+function Instagram({ instagram }: { instagram: string }) {
   const ref = useRef(null);
   const inView = useInView(ref, { once: true, amount: 0.1 });
 
@@ -1131,7 +1181,7 @@ function Instagram() {
             initial={{ opacity: 0 }}
             animate={inView ? { opacity: 1 } : {}}
             transition={{ duration: 1, delay: 0.4 }}
-            href="https://instagram.com/suseli.studio"
+            href={instagram}
             whileHover={{ x: 6 }}
             className="group flex items-center gap-4 text-[#E3E3DB] text-xs tracking-[0.3em] uppercase"
           >
@@ -1144,7 +1194,7 @@ function Instagram() {
           {instagramPosts.map((src, i) => (
             <motion.a
               key={i}
-              href="https://instagram.com/suseli.studio"
+              href={instagram}
               initial={{ opacity: 0, y: 30 }}
               animate={inView ? { opacity: 1, y: 0 } : {}}
               transition={{
@@ -1188,28 +1238,65 @@ function Instagram() {
 // ============================================================
 // Footer
 // ============================================================
-function Footer() {
+function Footer({
+  logo,
+  siteName,
+  footerText,
+  email,
+  whatsapp,
+  instagram,
+}: {
+  logo: string | null;
+  siteName: string;
+  footerText: string;
+  email: string;
+  whatsapp: string;
+  instagram: string;
+}) {
   return (
     <footer className="relative bg-[#2B2B2B] pt-24 md:pt-32 pb-10 overflow-hidden">
       <div className="max-w-[1600px] mx-auto px-6 md:px-12">
         <div className="grid grid-cols-2 md:grid-cols-12 gap-10 md:gap-8 mb-20">
           <div className="col-span-2 md:col-span-5">
-            <div className="text-[#E3E3DB] text-3xl md:text-4xl font-light tracking-[0.2em] mb-6">
-              SÜSEL<span className="text-[#0243C7]">İ</span>
+            <div className="mb-6">
+              {logo ? (
+                // eslint-disable-next-line @next/next/no-img-element
+                <img
+                  src={logo}
+                  alt={siteName}
+                  style={{ height: "44px", width: "auto", objectFit: "contain", display: "block" }}
+                />
+              ) : (
+                <Image
+                  src="/logo.png"
+                  alt={siteName}
+                  width={160}
+                  height={44}
+                  unoptimized
+                  style={{ height: "44px", width: "auto", objectFit: "contain", display: "block" }}
+                />
+              )}
             </div>
             <p className="text-[#E3E3DB]/50 text-sm leading-relaxed max-w-md font-light mb-8">
-              İstanbul merkezli, mimari oranlarda parça üreten yaratıcı stüdyo. Her tasarım atölyemizde ellerimizle hayata geçer.
+              {footerText}
             </p>
             <div className="flex items-center gap-3">
-              {["IG", "WA", "PI", "BE"].map((s) => (
-                <a
-                  key={s}
-                  href="#"
-                  className="w-10 h-10 rounded-full border border-[#E3E3DB]/15 flex items-center justify-center text-[#E3E3DB]/60 text-[10px] tracking-widest hover:bg-[#0243C7] hover:border-[#0243C7] hover:text-[#E3E3DB] transition-all duration-500"
-                >
-                  {s}
-                </a>
-              ))}
+              <a
+                href={instagram}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="w-10 h-10 rounded-full border border-[#E3E3DB]/15 flex items-center justify-center text-[#E3E3DB]/60 text-[10px] tracking-widest hover:bg-[#0243C7] hover:border-[#0243C7] hover:text-[#E3E3DB] transition-all duration-500"
+              >
+                IG
+              </a>
+              <a
+                href={`https://wa.me/${whatsapp}`}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="w-10 h-10 rounded-full border border-[#E3E3DB]/15 flex items-center justify-center text-[#E3E3DB]/60 text-[10px] tracking-widest hover:bg-[#0243C7] hover:border-[#0243C7] hover:text-[#E3E3DB] transition-all duration-500"
+              >
+                WA
+              </a>
             </div>
           </div>
 
@@ -1221,7 +1308,7 @@ function Footer() {
               {categories.map((c) => (
                 <li key={c.id}>
                   <a
-                    href={`#${c.id}`}
+                    href={`/kategori/${c.id}`}
                     className="text-[#E3E3DB]/80 hover:text-[#E3E3DB] text-sm font-light transition-colors"
                   >
                     {c.title}
@@ -1253,22 +1340,56 @@ function Footer() {
             <div className="space-y-3 text-[#E3E3DB]/80 text-sm font-light">
               <div>Çukurcuma Cad. No: 24</div>
               <div>Beyoğlu · İstanbul</div>
-              <div className="pt-3">+90 555 555 55 55</div>
-              <div>atelier@suseli.com</div>
+              <div className="pt-3">+{whatsapp}</div>
+              <div>{email}</div>
             </div>
           </div>
         </div>
 
         {/* Big mark */}
-        <div className="border-t border-[#E3E3DB]/10 pt-10">
-          <div className="text-[#E3E3DB]/[0.04] text-[20vw] md:text-[18vw] font-light text-center leading-none tracking-[-0.04em] select-none -mb-4 md:-mb-8">
-            SÜSELİ
-          </div>
+        <div className="border-t border-[#E3E3DB]/10 pt-12 flex justify-center">
+          {logo ? (
+            // eslint-disable-next-line @next/next/no-img-element
+            <img
+              src={logo}
+              alt=""
+              aria-hidden="true"
+              style={{
+                width: "40vw",
+                maxWidth: "520px",
+                height: "auto",
+                objectFit: "contain",
+                opacity: 0.06,
+                userSelect: "none",
+                display: "block",
+                marginBottom: "-24px",
+              }}
+            />
+          ) : (
+            <Image
+              src="/logo.png"
+              alt=""
+              width={600}
+              height={160}
+              unoptimized
+              aria-hidden="true"
+              style={{
+                width: "40vw",
+                maxWidth: "520px",
+                height: "auto",
+                objectFit: "contain",
+                opacity: 0.06,
+                userSelect: "none",
+                display: "block",
+                marginBottom: "-24px",
+              }}
+            />
+          )}
         </div>
 
         <div className="flex flex-col md:flex-row items-center justify-between gap-4 pt-8 border-t border-[#E3E3DB]/5">
           <div className="text-[#E3E3DB]/40 text-xs font-light">
-            © 2026 SÜSELİ Creative Studio · Tüm hakları saklıdır.
+            © 2026 {siteName} · Tüm hakları saklıdır.
           </div>
           <div className="flex items-center gap-6 text-[#E3E3DB]/40 text-xs font-light">
             <a href="#" className="hover:text-[#E3E3DB] transition-colors">
@@ -1290,7 +1411,7 @@ function Footer() {
 // ============================================================
 // Floating WhatsApp Button
 // ============================================================
-function FloatingWhatsApp() {
+function FloatingWhatsApp({ whatsapp }: { whatsapp: string }) {
   return (
     <motion.a
       initial={{ opacity: 0, scale: 0 }}
@@ -1298,7 +1419,7 @@ function FloatingWhatsApp() {
       transition={{ delay: 2.5, duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
       whileHover={{ scale: 1.08 }}
       whileTap={{ scale: 0.95 }}
-      href="https://wa.me/905555555555"
+      href={`https://wa.me/${whatsapp}`}
       className="fixed bottom-6 right-6 md:bottom-10 md:right-10 z-40 w-14 h-14 md:w-16 md:h-16 rounded-full bg-[#0243C7] backdrop-blur-xl border border-[#E3E3DB]/20 flex items-center justify-center shadow-2xl shadow-[#0243C7]/40"
     >
       <span className="absolute inset-0 rounded-full bg-[#0243C7] animate-ping opacity-30" />
@@ -1310,12 +1431,17 @@ function FloatingWhatsApp() {
 }
 
 // ============================================================
-// Page Component
+// Page -- reads settings from localStorage, passes as props
 // ============================================================
 export default function Page() {
-  // Smooth scroll behavior
+  const [settings, setSettings] = useState<SiteSettings>(DEFAULT_SETTINGS);
+
   useEffect(() => {
     document.documentElement.style.scrollBehavior = "smooth";
+    try {
+      const stored = localStorage.getItem(SETTINGS_KEY);
+      if (stored) setSettings({ ...DEFAULT_SETTINGS, ...JSON.parse(stored) });
+    } catch {}
     return () => {
       document.documentElement.style.scrollBehavior = "auto";
     };
@@ -1323,17 +1449,24 @@ export default function Page() {
 
   return (
     <main className="bg-[#0a0a0a] text-[#E3E3DB] antialiased overflow-x-hidden selection:bg-[#0243C7] selection:text-[#E3E3DB]">
-      <Navigation />
-      <Hero />
+      <Navigation logo={settings.logo} siteName={settings.siteName} whatsapp={settings.whatsapp} />
+      <Hero title={settings.heroTitle} subtitle={settings.heroSubtitle} />
       <MarqueeSection />
       <Categories />
       <Featured />
       <Gallery />
       <About />
-      <WhatsAppCTA />
-      <Instagram />
-      <Footer />
-      <FloatingWhatsApp />
+      <WhatsAppCTA whatsapp={settings.whatsapp} email={settings.email} />
+      <Instagram instagram={settings.instagram} />
+      <Footer
+        logo={settings.logo}
+        siteName={settings.siteName}
+        footerText={settings.footerText}
+        email={settings.email}
+        whatsapp={settings.whatsapp}
+        instagram={settings.instagram}
+      />
+      <FloatingWhatsApp whatsapp={settings.whatsapp} />
     </main>
   );
 }
