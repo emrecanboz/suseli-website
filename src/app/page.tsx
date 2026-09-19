@@ -7,15 +7,6 @@ import Link from "next/link";
 
 const MotionLink = motion(Link);
 
-/** Converts a display name to a URL-safe slug: "ATELIER N°7" → "atelier-n7" */
-function toSlug(text: string) {
-  return text
-    .toLowerCase()
-    .replace(/[^a-z0-9\s-]/g, "")
-    .trim()
-    .replace(/\s+/g, "-");
-}
-
 // ── Admin product type (mirrors admin/page.tsx) ───────────────────────────
 interface AdminProduct {
   id: string;
@@ -92,36 +83,6 @@ const categories = [
     subtitle: "05 — Özel Projeler",
     description: "Konseptten üretime — mimari mekânlar için bütüncül iç mekân tasarım hizmeti.",
     image: "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=1400&q=85&auto=format&fit=crop",
-  },
-];
-
-// NOT: Bu kartlar yer tutucudur. İsimler ve görseller geçicidir; gerçek
-// koleksiyon bilgisi geldiğinde değiştirilecektir. Doğrulanmamış malzeme
-// ve fiyat iddiası içermezler.
-const featuredItems = [
-  {
-    name: "MONOLITH",
-    type: "Yemek Masası",
-    price: "Talep Üzerine",
-    image: "https://images.unsplash.com/photo-1581539250439-c96689b516dd?w=1200&q=85&auto=format&fit=crop",
-  },
-  {
-    name: "ORBIT",
-    type: "Orta Sehpa",
-    price: "Talep Üzerine",
-    image: "https://images.unsplash.com/photo-1538688525198-9b88f6f53126?w=1200&q=85&auto=format&fit=crop",
-  },
-  {
-    name: "LUNA",
-    type: "Ayna",
-    price: "Talep Üzerine",
-    image: "https://images.unsplash.com/photo-1615529182904-14819c35db37?w=1200&q=85&auto=format&fit=crop",
-  },
-  {
-    name: "ATELIER N°7",
-    type: "Dekoratif Obje",
-    price: "Talep Üzerine",
-    image: "https://images.unsplash.com/photo-1602810318383-e386cc2a3ccf?w=1200&q=85&auto=format&fit=crop",
   },
 ];
 
@@ -642,7 +603,7 @@ function Featured() {
             >
               <span className="w-12 h-px bg-[#0243C7]" />
               <span className="text-[#E3E3DB]/60 text-xs tracking-[0.4em] uppercase">
-                {hasAdmin ? "Ürünler · Admin Koleksiyonu" : "Seçki · İmza Parçalar"}
+                {hasAdmin ? "Ürünler · Koleksiyon" : "Koleksiyon"}
               </span>
             </motion.div>
 
@@ -665,8 +626,8 @@ function Featured() {
             className="md:col-span-6 md:col-start-7 flex items-end"
           >
             <p className="text-[#E3E3DB]/60 text-sm md:text-base leading-relaxed font-light">
-              SÜSELİ atölyesinde her parça, doğal malzemenin karakterine saygı duyarak şekillendirilir.
-              Aşağıdaki seçki, koleksiyonumuzun en çok talep gören imza parçalarından oluşmaktadır.
+              SÜSELİ atölyesinde her parça; camın, aynanın ve ahşabın
+              karakterine saygı duyarak şekillendirilir.
             </p>
           </motion.div>
         </div>
@@ -678,79 +639,30 @@ function Featured() {
             ))}
           </div>
         ) : (
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8">
-            {featuredItems.map((item, i) => (
-              <FeaturedCard key={item.name} item={item} index={i} inView={inView} />
-            ))}
+          /* Admin panelinde henüz ürün yok. Uydurma ürün göstermek yerine
+             sade bir boş durum gösteriliyor. */
+          <div className="border border-[#E3E3DB]/10 rounded-2xl py-20 md:py-28 px-6 text-center">
+            <div className="text-[#E3E3DB]/40 text-[10px] tracking-[0.35em] uppercase mb-5">
+              Koleksiyon
+            </div>
+            <p className="text-[#E3E3DB] text-2xl md:text-3xl font-light tracking-[-0.02em] mb-4">
+              Parçalar yakında burada.
+            </p>
+            <p className="text-[#E3E3DB]/50 text-sm md:text-base font-light max-w-md mx-auto mb-10">
+              Koleksiyon hazırlanıyor. Bu süreçte kategorileri inceleyebilir ya da
+              bizimle doğrudan iletişime geçebilirsiniz.
+            </p>
+            <a
+              href="#koleksiyon"
+              className="inline-flex items-center gap-3 text-[#E3E3DB] text-xs tracking-[0.25em] uppercase border-b border-[#0243C7] pb-2 hover:gap-5 transition-all duration-500"
+            >
+              Kategorileri Gör
+              <span className="text-[#0243C7]">→</span>
+            </a>
           </div>
         )}
       </div>
     </section>
-  );
-}
-
-// ── Static fallback card (unchanged design) ───────────────────────────────
-function FeaturedCard({
-  item,
-  index,
-  inView,
-}: {
-  item: typeof featuredItems[0];
-  index: number;
-  inView: boolean;
-}) {
-  return (
-    <MotionLink
-      href={`/urun/${toSlug(item.name)}`}
-      initial={{ opacity: 0, y: 80 }}
-      animate={inView ? { opacity: 1, y: 0 } : {}}
-      transition={{
-        duration: 1,
-        delay: 0.2 + index * 0.15,
-        ease: [0.22, 1, 0.36, 1],
-      }}
-      className="group relative block"
-    >
-      <div className="relative h-[480px] md:h-[600px] w-full overflow-hidden rounded-2xl bg-[#161616]">
-        <motion.div
-          whileHover={{ scale: 1.06 }}
-          transition={{ duration: 1.2, ease: [0.22, 1, 0.36, 1] }}
-          className="absolute inset-0"
-        >
-          <Image src={item.image} alt={item.name} fill className="object-cover" />
-        </motion.div>
-
-        <div className="absolute inset-0 bg-gradient-to-t from-[#0a0a0a]/80 via-transparent to-transparent" />
-
-        <div className="absolute bottom-6 left-6 right-6 md:bottom-8 md:left-8 md:right-8">
-          <div className="backdrop-blur-2xl bg-[#0a0a0a]/40 border border-white/[0.08] rounded-2xl p-6 md:p-7">
-            <div className="flex items-start justify-between gap-4 mb-4">
-              <div>
-                <div className="text-[#E3E3DB]/50 text-[10px] tracking-[0.3em] uppercase mb-2">
-                  {item.type}
-                </div>
-                <h3 className="text-[#E3E3DB] text-2xl md:text-3xl font-light tracking-[-0.02em]">
-                  {item.name}
-                </h3>
-              </div>
-              <motion.button
-                whileHover={{ scale: 1.05 }}
-                className="shrink-0 w-11 h-11 rounded-full border border-[#E3E3DB]/20 flex items-center justify-center group-hover:bg-[#0243C7] group-hover:border-[#0243C7] transition-all duration-500"
-              >
-                <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
-                  <path d="M3 11L11 3M11 3H5M11 3V9" stroke="#E3E3DB" strokeWidth="1" />
-                </svg>
-              </motion.button>
-            </div>
-            <div className="flex items-center justify-end pt-4 border-t border-white/[0.06]">
-              <span className="text-[#E3E3DB] text-xs md:text-sm tracking-[0.1em]">
-                {item.price}
-              </span>
-            </div>
-          </div>
-        </div>
-      </div>
-    </MotionLink>
   );
 }
 
@@ -939,13 +851,6 @@ function About() {
   const ref = useRef(null);
   const inView = useInView(ref, { once: true, amount: 0.2 });
 
-  const stats = [
-    { value: "08", label: "Yıllık Tecrübe" },
-    { value: "140+", label: "Tamamlanan Proje" },
-    { value: "12", label: "Uluslararası Ödül" },
-    { value: "06", label: "Atölye Ustası" },
-  ];
-
   return (
     <section id="stüdyo" ref={ref} className="relative py-32 md:py-48 bg-[#E3E3DB] overflow-hidden">
       <div className="max-w-[1600px] mx-auto px-6 md:px-12">
@@ -1012,7 +917,7 @@ function About() {
               initial={{ opacity: 0 }}
               animate={inView ? { opacity: 1 } : {}}
               transition={{ duration: 1, delay: 0.5 }}
-              className="space-y-5 text-[#2B2B2B]/80 text-base md:text-lg leading-relaxed font-light max-w-2xl mb-12"
+              className="space-y-5 text-[#2B2B2B]/80 text-base md:text-lg leading-relaxed font-light max-w-2xl"
             >
               <p>
                 SÜSELİ, 2018 yılında İstanbul’da kurulan; mimari oranların; camın, aynanın ve ahşabın diliyle konuşan bir yaratıcı stüdyodur. Her bir parça, atölyemizde ustalarımızın elleriyle tasarlanır ve üretilir.
@@ -1022,23 +927,6 @@ function About() {
               </p>
             </motion.div>
 
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-8 border-t border-[#2B2B2B]/10 pt-10">
-              {stats.map((stat, i) => (
-                <motion.div
-                  key={stat.label}
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={inView ? { opacity: 1, y: 0 } : {}}
-                  transition={{ duration: 0.8, delay: 0.7 + i * 0.1 }}
-                >
-                  <div className="text-[#2B2B2B] text-4xl md:text-5xl font-light tracking-[-0.03em] mb-2">
-                    {stat.value}
-                  </div>
-                  <div className="text-[#2B2B2B]/50 text-[10px] tracking-[0.25em] uppercase">
-                    {stat.label}
-                  </div>
-                </motion.div>
-              ))}
-            </div>
           </div>
         </div>
       </div>
