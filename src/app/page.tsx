@@ -62,7 +62,7 @@ const categories = [
     id: "yemek-masasi",
     title: "Yemek Masası",
     subtitle: "01 — Sofra Mimarisi",
-    description: "Mermer, masif ahşap ve cam dokunuşlarıyla kurgulanmış ölçeklenebilir yemek masaları.",
+    description: "Cam, masif ahşap ve ayna detaylarıyla kurgulanmış ölçeklenebilir yemek masaları.",
     image: "https://images.unsplash.com/photo-1615875605825-5eb9bb5d52ac?w=1400&q=85&auto=format&fit=crop",
   },
   {
@@ -95,33 +95,32 @@ const categories = [
   },
 ];
 
+// NOT: Bu kartlar yer tutucudur. İsimler ve görseller geçicidir; gerçek
+// koleksiyon bilgisi geldiğinde değiştirilecektir. Doğrulanmamış malzeme
+// ve fiyat iddiası içermezler.
 const featuredItems = [
   {
     name: "MONOLITH",
     type: "Yemek Masası",
-    material: "Calacatta Mermer / Bronz",
     price: "Talep Üzerine",
     image: "https://images.unsplash.com/photo-1581539250439-c96689b516dd?w=1200&q=85&auto=format&fit=crop",
   },
   {
     name: "ORBIT",
     type: "Orta Sehpa",
-    material: "Travertin / Cam",
-    price: "₺ 48.500",
+    price: "Talep Üzerine",
     image: "https://images.unsplash.com/photo-1538688525198-9b88f6f53126?w=1200&q=85&auto=format&fit=crop",
   },
   {
     name: "LUNA",
     type: "Ayna",
-    material: "Pirinç / Füme Cam",
-    price: "₺ 22.900",
+    price: "Talep Üzerine",
     image: "https://images.unsplash.com/photo-1615529182904-14819c35db37?w=1200&q=85&auto=format&fit=crop",
   },
   {
     name: "ATELIER N°7",
     type: "Dekoratif Obje",
-    material: "El Üretimi Seramik",
-    price: "₺ 9.400",
+    price: "Talep Üzerine",
     image: "https://images.unsplash.com/photo-1602810318383-e386cc2a3ccf?w=1200&q=85&auto=format&fit=crop",
   },
 ];
@@ -433,16 +432,16 @@ function MarqueeSection() {
               Mimari
             </span>
             <span className="text-[#E3E3DB]/40 text-5xl md:text-7xl lg:text-8xl font-light tracking-[-0.02em]">
-              Mermer
+              Cam
             </span>
             <span className="text-[#E3E3DB] text-5xl md:text-7xl lg:text-8xl font-light italic tracking-[-0.02em]">
-              Pirinç
+              Ayna
             </span>
             <span className="text-[#0243C7] text-5xl md:text-7xl lg:text-8xl font-light tracking-[-0.02em]">
               Ahşap
             </span>
             <span className="text-[#E3E3DB]/40 text-5xl md:text-7xl lg:text-8xl font-light tracking-[-0.02em]">
-              Cam
+              Işık
             </span>
           </div>
         ))}
@@ -621,6 +620,9 @@ function Featured() {
   useEffect(() => {
     try {
       const stored = localStorage.getItem(ADMIN_STORAGE_KEY);
+      // localStorage yalnızca tarayıcıda okunabilir; SSR/prerender sırasında
+      // erişilemediği için bu senkronizasyon effect içinde yapılmak zorunda.
+      // eslint-disable-next-line react-hooks/set-state-in-effect
       if (stored) setAdminProducts(JSON.parse(stored));
     } catch {}
   }, []);
@@ -740,10 +742,7 @@ function FeaturedCard({
                 </svg>
               </motion.button>
             </div>
-            <div className="flex items-center justify-between pt-4 border-t border-white/[0.06]">
-              <span className="text-[#E3E3DB]/60 text-xs md:text-sm font-light">
-                {item.material}
-              </span>
+            <div className="flex items-center justify-end pt-4 border-t border-white/[0.06]">
               <span className="text-[#E3E3DB] text-xs md:text-sm tracking-[0.1em]">
                 {item.price}
               </span>
@@ -1016,7 +1015,7 @@ function About() {
               className="space-y-5 text-[#2B2B2B]/80 text-base md:text-lg leading-relaxed font-light max-w-2xl mb-12"
             >
               <p>
-                SÜSELİ, 2018 yılında İstanbul'da kurulan; mimari oranlar ve doğal malzemelerin diliyle konuşan bir yaratıcı stüdyodur. Her bir parça, atölyemizde ustalarımızın elleriyle tasarlanır ve üretilir.
+                SÜSELİ, 2018 yılında İstanbul’da kurulan; mimari oranların; camın, aynanın ve ahşabın diliyle konuşan bir yaratıcı stüdyodur. Her bir parça, atölyemizde ustalarımızın elleriyle tasarlanır ve üretilir.
               </p>
               <p>
                 Tasarım anlayışımız; geçici eğilimlerden uzak, zamansız bir estetiği hedefler. Mekânın ihtiyaç duyduğu sessizliği yakalayan, ölçülü ve heykelsi parçalar üretiyoruz.
@@ -1440,6 +1439,9 @@ export default function Page() {
     document.documentElement.style.scrollBehavior = "smooth";
     try {
       const stored = localStorage.getItem(SETTINGS_KEY);
+      // localStorage yalnızca tarayıcıda okunabilir; SSR/prerender sırasında
+      // erişilemediği için bu senkronizasyon effect içinde yapılmak zorunda.
+      // eslint-disable-next-line react-hooks/set-state-in-effect
       if (stored) setSettings({ ...DEFAULT_SETTINGS, ...JSON.parse(stored) });
     } catch {}
     return () => {

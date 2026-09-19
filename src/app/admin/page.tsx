@@ -62,6 +62,9 @@ export default function AdminPage() {
   useEffect(() => {
     try {
       const p = localStorage.getItem(PRODUCTS_KEY);
+      // localStorage yalnızca tarayıcıda okunabilir; SSR/prerender sırasında
+      // erişilemediği için bu senkronizasyon effect içinde yapılmak zorunda.
+      // eslint-disable-next-line react-hooks/set-state-in-effect
       if (p) setProducts(JSON.parse(p));
     } catch {}
     try {
@@ -333,6 +336,8 @@ export default function AdminPage() {
                   }}
                 >
                   {logoPreview ? (
+                    // Logo base64 data-URL; next/image optimize edemez.
+                    // eslint-disable-next-line @next/next/no-img-element
                     <img
                       src={logoPreview}
                       alt="Logo"
@@ -596,6 +601,8 @@ export default function AdminPage() {
                 />
                 <label htmlFor="product-image" style={uploadLabelStyle}>
                   {imagePreview ? (
+                    // Yüklenen görsel base64 data-URL; next/image optimize edemez.
+                    // eslint-disable-next-line @next/next/no-img-element
                     <img
                       src={imagePreview}
                       alt=""
@@ -648,6 +655,8 @@ export default function AdminPage() {
                   }}
                 >
                   {p.image && (
+                    // Ürün görseli base64 data-URL; next/image optimize edemez.
+                    // eslint-disable-next-line @next/next/no-img-element
                     <img
                       src={p.image}
                       alt={p.title}

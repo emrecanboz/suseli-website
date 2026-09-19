@@ -104,6 +104,9 @@ export default function CategoryPage() {
       const raw = localStorage.getItem(STORAGE_KEY);
       if (raw) {
         const all: Product[] = JSON.parse(raw);
+        // localStorage yalnızca tarayıcıda okunabilir; SSR/prerender sırasında
+        // erişilemediği için bu senkronizasyon effect içinde yapılmak zorunda.
+        // eslint-disable-next-line react-hooks/set-state-in-effect
         setProducts(all.filter((p) => matchesSlug(p.category, slug)));
       }
     } catch {}
@@ -115,7 +118,7 @@ export default function CategoryPage() {
       style={{ fontFamily: "var(--font-geist-sans, 'Inter', sans-serif)" }}
     >
       <TopBar />
-      <CategoryHero meta={meta} slug={slug} />
+      <CategoryHero meta={meta} />
       <ProductGrid products={products} loaded={loaded} meta={meta} />
       <BottomCTA />
     </main>
@@ -198,10 +201,8 @@ function TopBar() {
 // ── Hero ──────────────────────────────────────────────────────────────────
 function CategoryHero({
   meta,
-  slug,
 }: {
   meta: { title: string; subtitle: string; description: string };
-  slug: string;
 }) {
   const heroRef = useRef<HTMLDivElement>(null);
   const { scrollYProgress } = useScroll({
