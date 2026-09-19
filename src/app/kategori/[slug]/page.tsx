@@ -33,7 +33,7 @@ const CATEGORY_META: Record<
     title: "Yemek Masası",
     subtitle: "01 — Sofra Mimarisi",
     description:
-      "Mermer, masif ahşap ve cam dokunuşlarıyla kurgulanmış ölçeklenebilir yemek masaları. Her parça, sofrayı bir ritüele dönüştürmek için tasarlanmıştır.",
+      "Cam, masif ahşap ve ayna detaylarıyla kurgulanmış ölçeklenebilir yemek masaları. Her parça, sofrayı bir ritüele dönüştürmek için tasarlanmıştır.",
     accent: "#0243C7",
   },
   "orta-sehpa": {
@@ -186,7 +186,7 @@ function TopBar() {
 
         {/* WhatsApp pill */}
         <motion.a
-          href="https://wa.me/905555555555"
+          href="https://wa.me/905333896916"
           whileHover={{ scale: 1.04 }}
           className="hidden md:flex items-center gap-2 px-5 py-2.5 rounded-full bg-[#E3E3DB]/[0.04] border border-[#E3E3DB]/10 text-[#E3E3DB] text-xs tracking-[0.2em] uppercase"
         >
@@ -617,7 +617,7 @@ function BottomCTA() {
           <motion.a
             whileHover={{ scale: 1.03 }}
             whileTap={{ scale: 0.97 }}
-            href="https://wa.me/905555555555"
+            href="https://wa.me/905333896916"
             className="flex items-center gap-4 px-8 py-4 rounded-full bg-[#0243C7] text-[#E3E3DB] text-xs tracking-[0.2em] uppercase font-medium"
           >
             <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
