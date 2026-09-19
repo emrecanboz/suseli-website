@@ -36,9 +36,11 @@ const DEFAULT_SETTINGS: SiteSettings = {
   siteName:     "SÜSELİ",
   heroTitle:    "ZAMANSIZ",
   heroSubtitle: "TASARIM",
-  whatsapp:     "905555555555",
+  whatsapp:     "905333896916",
   instagram:    "https://instagram.com/suseli.studio",
-  email:        "atelier@suseli.com",
+  // Çalışan bir kurumsal e-posta kurulana kadar boş. Boşken site
+  // e-postayı hiç göstermez; değer girilince otomatik geri gelir.
+  email:        "",
   footerText:   "İstanbul merkezli, mimari oranlarda parça üreten yaratıcı stüdyo. Her tasarım atölyemizde ellerimizle hayata geçer.",
   logo:         null,
 };
@@ -880,8 +882,6 @@ function About() {
                 Atölye Konumu
               </div>
               <div className="text-[#E3E3DB] text-lg md:text-xl font-light leading-snug">
-                Çukurcuma · Beyoğlu
-                <br />
                 İstanbul · Türkiye
               </div>
             </motion.div>
@@ -1015,14 +1015,16 @@ function WhatsAppCTA({ whatsapp, email }: { whatsapp: string; email: string }) {
             <span className="w-10 h-px bg-[#0243C7] group-hover:w-16 transition-all duration-500" />
           </motion.a>
 
-          <motion.a
-            whileHover={{ scale: 1.03 }}
-            whileTap={{ scale: 0.98 }}
-            href={`mailto:${email}`}
-            className="flex items-center gap-3 px-8 py-5 rounded-full border border-[#E3E3DB]/30 text-[#E3E3DB] text-sm tracking-[0.2em] uppercase backdrop-blur-xl"
-          >
-            {email}
-          </motion.a>
+          {email && (
+            <motion.a
+              whileHover={{ scale: 1.03 }}
+              whileTap={{ scale: 0.98 }}
+              href={`mailto:${email}`}
+              className="flex items-center gap-3 px-8 py-5 rounded-full border border-[#E3E3DB]/30 text-[#E3E3DB] text-sm tracking-[0.2em] uppercase backdrop-blur-xl"
+            >
+              {email}
+            </motion.a>
+          )}
         </motion.div>
       </div>
     </section>
@@ -1225,10 +1227,9 @@ function Footer({
               İletişim
             </div>
             <div className="space-y-3 text-[#E3E3DB]/80 text-sm font-light">
-              <div>Çukurcuma Cad. No: 24</div>
-              <div>Beyoğlu · İstanbul</div>
+              <div>İstanbul · Türkiye</div>
               <div className="pt-3">+{whatsapp}</div>
-              <div>{email}</div>
+              {email && <div>{email}</div>}
             </div>
           </div>
         </div>

@@ -30,9 +30,9 @@ const DEFAULT_SETTINGS: SiteSettings = {
   siteName: "SUSELI",
   heroTitle: "ZAMANSIZ",
   heroSubtitle: "TASARIM",
-  whatsapp: "905555555555",
+  whatsapp: "905333896916",
   instagram: "https://instagram.com/suseli.studio",
-  email: "atelier@suseli.com",
+  email: "",
   footerText:
     "Istanbul merkezli, mimari oranlarda parca ureten yaratici studyo. Her tasarim atolyemizde ellerimizle hayata gecer.",
   logo: null,
