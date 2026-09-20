@@ -7,8 +7,8 @@ export default function robots(): MetadataRoute.Robots {
       {
         userAgent: "*",
         allow: "/",
-        // Yönetim paneli arama motorlarına kapalı.
-        disallow: "/admin",
+        // Yönetim sayfaları arama motorlarına kapalı.
+        disallow: ["/studio"],
       },
     ],
     sitemap: `${SITE_URL}/sitemap.xml`,

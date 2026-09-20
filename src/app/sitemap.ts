@@ -1,8 +1,20 @@
 import type { MetadataRoute } from "next";
-import { CATEGORY_SLUGS, SITE_URL } from "@/lib/site";
 
-export default function sitemap(): MetadataRoute.Sitemap {
+import { sanityFetch } from "../../sanity/lib/client";
+import { allProductSlugsQuery } from "../../sanity/lib/queries";
+import { SITE_URL } from "@/lib/site";
+import { getCategories } from "@/lib/getContent";
+
+export const revalidate = 3600;
+
+export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const lastModified = new Date();
+
+  // Sanity erişilemezse boş listeye düşer; site haritası yine üretilir.
+  const [categories, productSlugs] = await Promise.all([
+    getCategories(),
+    sanityFetch<string[]>(allProductSlugsQuery, {}, []),
+  ]);
 
   return [
     {
@@ -11,11 +23,17 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: "weekly",
       priority: 1,
     },
-    ...CATEGORY_SLUGS.map((slug) => ({
-      url: `${SITE_URL}/kategori/${slug}`,
+    ...categories.map((c) => ({
+      url: `${SITE_URL}/kategori/${c.id}`,
       lastModified,
       changeFrequency: "weekly" as const,
       priority: 0.8,
+    })),
+    ...productSlugs.map((slug) => ({
+      url: `${SITE_URL}/urun/${slug}`,
+      lastModified,
+      changeFrequency: "monthly" as const,
+      priority: 0.6,
     })),
   ];
 }
