@@ -32,7 +32,7 @@ const DEFAULT_SETTINGS: SiteSettings = {
   heroSubtitle: "TASARIM",
   whatsapp: "905333896916",
   instagram: "https://instagram.com/suseli.studio",
-  email: "",
+  email: "info@suseli.studio",
   footerText:
     "Istanbul merkezli, mimari oranlarda parca ureten yaratici studyo. Her tasarim atolyemizde ellerimizle hayata gecer.",
   logo: null,

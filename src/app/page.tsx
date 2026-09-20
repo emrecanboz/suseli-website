@@ -38,9 +38,7 @@ const DEFAULT_SETTINGS: SiteSettings = {
   heroSubtitle: "TASARIM",
   whatsapp:     "905333896916",
   instagram:    "https://instagram.com/suseli.studio",
-  // Çalışan bir kurumsal e-posta kurulana kadar boş. Boşken site
-  // e-postayı hiç göstermez; değer girilince otomatik geri gelir.
-  email:        "",
+  email:        "info@suseli.studio",
   footerText:   "İstanbul merkezli, mimari oranlarda parça üreten yaratıcı stüdyo. Her tasarım atölyemizde ellerimizle hayata geçer.",
   logo:         null,
 };
