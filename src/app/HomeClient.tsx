@@ -69,10 +69,10 @@ function Navigation({
             <Image
               src="/logo.png"
               alt={siteName}
-              width={160}
-              height={44}
+              width={628}
+              height={216}
               priority
-              unoptimized
+              sizes="128px"
               style={{ height: "36px", width: "auto", objectFit: "contain", display: "block" }}
             />
           )}
@@ -1074,9 +1074,9 @@ function Footer({
                 <Image
                   src="/logo.png"
                   alt={siteName}
-                  width={160}
-                  height={44}
-                  unoptimized
+                  width={628}
+                  height={216}
+                  sizes="160px"
                   style={{ height: "44px", width: "auto", objectFit: "contain", display: "block" }}
                 />
               )}
@@ -1172,9 +1172,9 @@ function Footer({
             <Image
               src="/logo.png"
               alt=""
-              width={600}
-              height={160}
-              unoptimized
+              width={628}
+              height={216}
+              sizes="(max-width: 768px) 80vw, 520px"
               aria-hidden="true"
               style={{
                 width: "40vw",
