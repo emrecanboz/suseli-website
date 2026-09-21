@@ -46,6 +46,16 @@ export const product = defineType({
       validation: (r) => r.min(1).error("En az bir fotoğraf gerekli."),
     }),
     defineField({
+      name: "isRender",
+      title: "Görseller tasarım görselidir (fotoğraf değil)",
+      type: "boolean",
+      description:
+        "Ürünün gerçek fotoğrafı henüz yoksa ve görsel bilgisayarda " +
+        "üretildiyse bunu işaretle. Sitede görselin altında 'Tasarım " +
+        "görseli' notu çıkar. Gerçek fotoğrafı yüklediğinde işareti kaldır.",
+      initialValue: false,
+    }),
+    defineField({
       name: "description",
       title: "Açıklama",
       type: "text",

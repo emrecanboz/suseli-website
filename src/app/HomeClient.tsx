@@ -630,6 +630,16 @@ function ProductCard({
         {/* Gradient veil */}
         <div className="absolute inset-0 bg-gradient-to-t from-[#0a0a0a]/90 via-[#0a0a0a]/20 to-transparent" />
 
+        {/* Render'ı fotoğraf gibi göstermiyoruz — panelde işaretliyse
+            kartın üstünde ince bir etiket çıkar. */}
+        {product.isRender && product.image && (
+          <div className="absolute top-5 left-5 md:top-6 md:left-6 backdrop-blur-xl bg-[#0a0a0a]/45 border border-white/[0.12] rounded-full px-3 py-1.5">
+            <span className="text-[#E3E3DB]/70 text-[9px] tracking-[0.28em] uppercase">
+              Tasarım Görseli
+            </span>
+          </div>
+        )}
+
         {/* Glass info card */}
         <div className="absolute bottom-6 left-6 right-6 md:bottom-8 md:left-8 md:right-8">
           <div className="backdrop-blur-2xl bg-[#0a0a0a]/50 border border-white/[0.08] rounded-2xl p-6 md:p-7">
@@ -707,6 +717,18 @@ function Gallery() {
             <br />
             <span className="italic text-[#E3E3DB]/40">yeni sessizliği.</span>
           </motion.h2>
+
+          {/* Bu kareler ürün fotoğrafı değil; malzeme ve ışık çalışması.
+              Ziyaretçiyi yanıltmamak için açıkça yazıyoruz. */}
+          <motion.p
+            initial={{ opacity: 0 }}
+            animate={inView ? { opacity: 1 } : {}}
+            transition={{ duration: 1, delay: 0.3 }}
+            className="text-[#E3E3DB]/35 text-xs md:text-sm font-light mt-8 max-w-md leading-relaxed"
+          >
+            Malzeme ve ışık çalışmaları — cam kenarı, beton, sıva.
+            Ürün görselleri koleksiyon bölümünde.
+          </motion.p>
         </div>
 
         <div className="grid grid-cols-12 gap-4 md:gap-6">
@@ -739,11 +761,12 @@ function Gallery() {
                 Daha fazlası
               </span>
               <h4 className="text-[#E3E3DB] text-2xl md:text-3xl font-light mb-6">
-                Tüm Galeri
+                Koleksiyon
               </h4>
+              {/* Eskiden href="#" idi, hiçbir yere gitmiyordu. */}
               <motion.a
                 whileHover={{ x: 4 }}
-                href="#"
+                href="#koleksiyon"
                 className="text-[#E3E3DB] text-xs tracking-[0.3em] uppercase flex items-center gap-3"
               >
                 Keşfet

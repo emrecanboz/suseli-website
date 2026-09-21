@@ -10,6 +10,7 @@ export const featuredProductsQuery = groq`
     price,
     materials,
     dimensions,
+    isRender,
     "categoryTitle": category->title,
     "categorySlug": category->slug.current,
     images
@@ -27,6 +28,7 @@ export const productsByCategoryQuery = groq`
     price,
     materials,
     dimensions,
+    isRender,
     "categoryTitle": category->title,
     "categorySlug": category->slug.current,
     images
@@ -82,6 +84,7 @@ export const productBySlugQuery = groq`
     price,
     materials,
     dimensions,
+    isRender,
     "categoryTitle": category->title,
     "categorySlug": category->slug.current,
     images

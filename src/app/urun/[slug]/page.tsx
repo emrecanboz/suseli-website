@@ -91,6 +91,15 @@ export default async function ProductPage({ params }: Params) {
                 </span>
               </div>
             )}
+
+            {/* Render'ı fotoğraf gibi sunmuyoruz: panelde işaretliyse
+                görselin altında açıkça yazar. */}
+            {product.isRender && product.images.length > 0 && (
+              <p className="text-[#E3E3DB]/40 text-[11px] leading-relaxed pt-1">
+                Görseller tasarım görselidir. Üretim; ölçü, cam rengi ve
+                ahşap seçimine göre farklılık gösterebilir.
+              </p>
+            )}
           </div>
 
           {/* Bilgiler */}

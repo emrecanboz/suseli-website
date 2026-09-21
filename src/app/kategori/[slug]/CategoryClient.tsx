@@ -415,6 +415,16 @@ function ProductCard({
           </motion.div>
         )}
 
+        {/* Render'ı fotoğraf gibi göstermiyoruz — panelde işaretliyse
+            görselin sağ üstünde ince bir etiket çıkar. */}
+        {product.isRender && product.image && (
+          <div className="absolute top-5 right-5 px-3 py-1.5 rounded-full bg-[#0a0a0a]/50 backdrop-blur-xl border border-white/[0.12]">
+            <span className="text-[#E3E3DB]/65 text-[9px] tracking-[0.28em] uppercase">
+              Tasarım Görseli
+            </span>
+          </div>
+        )}
+
         {/* Hover arrow */}
         <motion.div
           animate={{

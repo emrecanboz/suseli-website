@@ -50,6 +50,7 @@ interface RawProduct {
   price?: string;
   materials?: string;
   dimensions?: string;
+  isRender?: boolean;
   categoryTitle?: string;
   categorySlug?: string;
   images?: Image[];
@@ -84,6 +85,7 @@ function toProduct(p: RawProduct): ProductItem | null {
     description: p.description ?? "",
     image: images[0] ?? null,
     images,
+    isRender: p.isRender === true,
     price: p.price ?? "",
     materials: p.materials ?? "",
     dimensions: p.dimensions ?? "",

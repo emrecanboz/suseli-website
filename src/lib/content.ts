@@ -40,6 +40,12 @@ export interface ProductItem {
   /** Kapak görseli. */
   image: string | null;
   images: string[];
+  /**
+   * Görseller gerçek fotoğraf değil, bilgisayarda üretilmiş tasarım
+   * görseliyse true olur. Sitede görselin yanında açıkça belirtilir —
+   * render'ı fotoğraf gibi sunmayız.
+   */
+  isRender: boolean;
   /** Aşağıdakiler boşsa sitede hiç gösterilmez. */
   price: string;
   materials: string;
@@ -112,13 +118,23 @@ export const FALLBACK_CATEGORIES: CategoryItem[] = [
   },
 ];
 
+/**
+ * Galeri — malzeme ve ışık çalışmaları.
+ *
+ * Bunlar ürün fotoğrafı DEĞİLDİR ve öyle sunulmaz: cam kenarı, beton,
+ * sıva ve ışık izi gibi doku/atmosfer kareleridir. Galeri başlığının
+ * altında bu açıkça yazar.
+ *
+ * Kaynak: stüdyonun kendi görsel çalışmalarından alınan kırpımlar.
+ * Tanınabilir bir ürün formu bilinçli olarak dışarıda bırakıldı.
+ */
 export const GALLERY_IMAGES = [
-  "https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?w=1600&q=85&auto=format&fit=crop",
-  "https://images.unsplash.com/photo-1616594039964-ae9021a400a0?w=1600&q=85&auto=format&fit=crop",
-  "https://images.unsplash.com/photo-1618219740975-d40978bb7378?w=1600&q=85&auto=format&fit=crop",
-  "https://images.unsplash.com/photo-1631679706909-1844bbd07221?w=1600&q=85&auto=format&fit=crop",
-  "https://images.unsplash.com/photo-1616137422495-1e9e46e2aa77?w=1600&q=85&auto=format&fit=crop",
-  "https://images.unsplash.com/photo-1615874959474-d609969a20ed?w=1600&q=85&auto=format&fit=crop",
+  "/gorseller/galeri-1-cam-kenar.jpg",
+  "/gorseller/galeri-2-beton.jpg",
+  "/gorseller/galeri-3-isik-izi.jpg",
+  "/gorseller/galeri-4-siva.jpg",
+  "/gorseller/galeri-5-golge.jpg",
+  "/gorseller/galeri-6-gece.jpg",
 ];
 
 export const INSTAGRAM_POSTS = [
