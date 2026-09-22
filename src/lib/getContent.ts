@@ -15,6 +15,8 @@ import {
 import {
   DEFAULT_SETTINGS,
   FALLBACK_CATEGORIES,
+  FALLBACK_FEATURED_SLUGS,
+  FALLBACK_PRODUCTS,
   type CategoryItem,
   type ProductItem,
   type SiteSettings,
@@ -134,7 +136,13 @@ export async function getCategory(slug: string): Promise<CategoryItem | null> {
 
 export async function getFeaturedProducts(): Promise<ProductItem[]> {
   const raw = await sanityFetch<RawProduct[]>(featuredProductsQuery, {}, []);
-  return raw.map(toProduct).filter((p): p is ProductItem => p !== null);
+  const mapped = raw.map(toProduct).filter((p): p is ProductItem => p !== null);
+  if (mapped.length > 0) return mapped;
+  // Panelde hiç ürün yoksa koleksiyon çizimleri gösterilir; böylece
+  // katalog hiçbir zaman boş kalmaz.
+  return FALLBACK_PRODUCTS.filter((p) =>
+    FALLBACK_FEATURED_SLUGS.includes(p.slug),
+  );
 }
 
 export async function getProductsByCategory(
@@ -145,7 +153,9 @@ export async function getProductsByCategory(
     { slug },
     [],
   );
-  return raw.map(toProduct).filter((p): p is ProductItem => p !== null);
+  const mapped = raw.map(toProduct).filter((p): p is ProductItem => p !== null);
+  if (mapped.length > 0) return mapped;
+  return FALLBACK_PRODUCTS.filter((p) => p.categorySlug === slug);
 }
 
 export async function getProduct(slug: string): Promise<ProductItem | null> {
@@ -154,5 +164,12 @@ export async function getProduct(slug: string): Promise<ProductItem | null> {
     { slug },
     null,
   );
-  return raw ? toProduct(raw) : null;
+  const mapped = raw ? toProduct(raw) : null;
+  if (mapped) return mapped;
+  return FALLBACK_PRODUCTS.find((p) => p.slug === slug) ?? null;
+}
+
+/** Sitemap için: panelde ürün yoksa koleksiyon adresleri kullanılır. */
+export function getFallbackProductSlugs(): string[] {
+  return FALLBACK_PRODUCTS.map((p) => p.slug);
 }

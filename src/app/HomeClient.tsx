@@ -601,7 +601,11 @@ function ProductCard({
       }}
       className="group relative block"
     >
-      <div className="relative h-[480px] md:h-[600px] w-full overflow-hidden rounded-2xl bg-[#161616]">
+      <div
+        className={`relative h-[480px] md:h-[600px] w-full overflow-hidden rounded-2xl ${
+          product.isRender ? "bg-[#0F0F0F]" : "bg-[#161616]"
+        }`}
+      >
 
         {/* Image or gradient placeholder */}
         <motion.div
@@ -611,10 +615,13 @@ function ProductCard({
         >
           {product.image ? (
             // eslint-disable-next-line @next/next/no-img-element
+            // Teknik çizim/render kırpılmamalı; fotoğraf ise kaplasın.
             <img
               src={product.image}
               alt={product.title}
-              className="w-full h-full object-cover"
+              className={`w-full h-full ${
+                product.isRender ? "object-contain" : "object-cover"
+              }`}
             />
           ) : (
             <div

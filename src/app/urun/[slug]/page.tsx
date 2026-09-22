@@ -72,7 +72,9 @@ export default async function ProductPage({ params }: Params) {
               product.images.map((src, i) => (
                 <div
                   key={src}
-                  className="relative w-full aspect-[4/5] rounded-2xl overflow-hidden bg-[#161616]"
+                  className={`relative w-full aspect-[4/5] rounded-2xl overflow-hidden ${
+                    product.isRender ? "bg-[#0F0F0F]" : "bg-[#161616]"
+                  }`}
                 >
                   <Image
                     src={src}
@@ -80,7 +82,7 @@ export default async function ProductPage({ params }: Params) {
                     fill
                     priority={i === 0}
                     sizes="(max-width: 1024px) 100vw, 50vw"
-                    className="object-cover"
+                    className={product.isRender ? "object-contain" : "object-cover"}
                   />
                 </div>
               ))
@@ -96,8 +98,9 @@ export default async function ProductPage({ params }: Params) {
                 görselin altında açıkça yazar. */}
             {product.isRender && product.images.length > 0 && (
               <p className="text-[#E3E3DB]/40 text-[11px] leading-relaxed pt-1">
-                Görseller tasarım görselidir. Üretim; ölçü, cam rengi ve
-                ahşap seçimine göre farklılık gösterebilir.
+                Bu parça sipariş üzerine üretilir. Görseller tasarım
+                görselidir; ölçü, cam rengi ve ahşap seçimi projeye göre
+                belirlenir.
               </p>
             )}
           </div>

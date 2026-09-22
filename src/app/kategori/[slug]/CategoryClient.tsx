@@ -356,7 +356,7 @@ function ProductCard({
       className="group relative flex flex-col rounded-2xl overflow-hidden bg-[#141414] border border-white/[0.04] cursor-pointer"
     >
       {/* Image area */}
-      <div className="relative h-[300px] md:h-[340px] overflow-hidden bg-[#0f0f0f] flex-shrink-0">
+      <div className="relative h-[300px] md:h-[340px] overflow-hidden bg-[#0F0F0F] flex-shrink-0">
         {product.image ? (
           <motion.div
             animate={{ scale: hovered ? 1.07 : 1 }}
@@ -367,7 +367,9 @@ function ProductCard({
             <img
               src={product.image}
               alt={product.title}
-              className="w-full h-full object-cover"
+              className={`w-full h-full ${
+                product.isRender ? "object-contain" : "object-cover"
+              }`}
             />
           </motion.div>
         ) : (
