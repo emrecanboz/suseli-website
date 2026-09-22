@@ -59,9 +59,9 @@ export const DEFAULT_SETTINGS: SiteSettings = {
   whatsapp: "905333896916",
   instagram: "https://instagram.com/suseli.studio",
   email: "info@suseli.studio",
-  address: "İstanbul · Türkiye",
+  address: "Bursa · Türkiye",
   footerText:
-    "İstanbul merkezli, mimari oranlarda parça üreten yaratıcı stüdyo. Her tasarım atölyemizde ellerimizle hayata geçer.",
+    "Bursa merkezli, mimari oranlarda parça üreten yaratıcı stüdyo. Her tasarım atölyemizde ellerimizle hayata geçer.",
   logo: null,
 };
 

@@ -62,7 +62,7 @@ export const siteSettings = defineType({
       title: "Adres (isteğe bağlı)",
       type: "string",
       description:
-        'Boş bırakırsan sitede "İstanbul · Türkiye" yazar. ' +
+        'Boş bırakırsan sitede "Bursa · Türkiye" yazar. ' +
         "Doğrulamadığın adresi yazma.",
     }),
 

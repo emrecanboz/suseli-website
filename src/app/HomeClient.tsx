@@ -195,7 +195,7 @@ function Hero({ title, subtitle }: { title: string; subtitle: string }) {
         >
           <span className="w-12 h-px bg-[#0243C7]" />
           <span className="text-[#E3E3DB]/60 text-xs md:text-sm tracking-[0.4em] uppercase">
-            İstanbul · Atölye · 2018
+            Bursa · Atölye · 2023
           </span>
         </motion.div>
 
@@ -247,7 +247,7 @@ function Hero({ title, subtitle }: { title: string; subtitle: string }) {
           className="flex flex-col md:flex-row md:items-end md:justify-between gap-8 max-w-6xl"
         >
           <p className="text-[#E3E3DB]/70 text-base md:text-lg max-w-md leading-relaxed font-light">
-            Mimari oranlarda kurgulanmış, her parçası elle üretilen yaşam mekânı objeleri. SÜSELİ; lüksü zamanın ötesine taşıyan İstanbul merkezli yaratıcı stüdyodur.
+            Mimari oranlarda kurgulanmış, her parçası elle üretilen yaşam mekânı objeleri. SÜSELİ; lüksü zamanın ötesine taşıyan Bursa merkezli yaratıcı stüdyodur.
           </p>
 
           <div className="flex items-center gap-6">
@@ -816,7 +816,7 @@ function About() {
                 Atölye Konumu
               </div>
               <div className="text-[#E3E3DB] text-lg md:text-xl font-light leading-snug">
-                İstanbul · Türkiye
+                Bursa · Türkiye
               </div>
             </motion.div>
           </motion.div>
@@ -854,7 +854,7 @@ function About() {
               className="space-y-5 text-[#2B2B2B]/80 text-base md:text-lg leading-relaxed font-light max-w-2xl"
             >
               <p>
-                SÜSELİ, 2018 yılında İstanbul’da kurulan; mimari oranların; camın, aynanın ve ahşabın diliyle konuşan bir yaratıcı stüdyodur. Her bir parça, atölyemizde ustalarımızın elleriyle tasarlanır ve üretilir.
+                SÜSELİ, 2023 yılında Bursa’da kurulan; mimari oranların; camın, aynanın ve ahşabın diliyle konuşan bir yaratıcı stüdyodur. Her bir parça, atölyemizde ustalarımızın elleriyle tasarlanır ve üretilir.
               </p>
               <p>
                 Tasarım anlayışımız; geçici eğilimlerden uzak, zamansız bir estetiği hedefler. Mekânın ihtiyaç duyduğu sessizliği yakalayan, ölçülü ve heykelsi parçalar üretiyoruz.

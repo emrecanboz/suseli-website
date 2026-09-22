@@ -88,10 +88,10 @@ function TopBar() {
           <Image
             src="/logo.png"
             alt="SÜSELİ"
-            width={160}
-            height={44}
+            width={628}
+            height={216}
             priority
-            unoptimized
+            sizes="128px"
             style={{ height: "36px", width: "auto", objectFit: "contain", display: "block" }}
           />
         </motion.a>
@@ -510,7 +510,7 @@ function BottomCTA() {
         >
           <span className="w-8 h-px bg-[#0243C7]" />
           <span className="text-[#E3E3DB]/50 text-xs tracking-[0.4em] uppercase">
-            SÜSELİ Atölye · İstanbul
+            SÜSELİ Atölye · Bursa
           </span>
           <span className="w-8 h-px bg-[#0243C7]" />
         </motion.div>

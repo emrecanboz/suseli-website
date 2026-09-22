@@ -12,7 +12,7 @@ export const SITE_URL = (
 export const SITE_NAME = "SÜSELİ Creative Studio";
 
 export const SITE_DESCRIPTION =
-  "İstanbul merkezli yaratıcı stüdyo. Yemek masası, orta sehpa, dekorasyon, ayna ve özel tasarım projeleri.";
+  "Bursa merkezli yaratıcı stüdyo. Yemek masası, orta sehpa, dekorasyon, ayna ve özel tasarım projeleri.";
 
 /** Kategori slug'ları — src/app/kategori/[slug]/page.tsx içindeki CATEGORY_META ile aynı. */
 export const CATEGORY_SLUGS = [
