@@ -166,8 +166,8 @@ function Hero({ title, subtitle }: { title: string; subtitle: string }) {
     >
       <motion.div style={{ scale }} className="absolute inset-0">
         <Image
-          src="https://images.unsplash.com/photo-1615529182904-14819c35db37?w=2400&q=90&auto=format&fit=crop"
-          alt="SÜSELİ Atelier"
+          src="/gorseller/hero.jpg"
+          alt=""
           fill
           priority
           className="object-cover"
@@ -799,8 +799,8 @@ function About() {
           >
             <div className="relative h-[500px] md:h-[700px] rounded-2xl overflow-hidden">
               <Image
-                src="https://images.unsplash.com/photo-1631679706909-1844bbd07221?w=1400&q=85&auto=format&fit=crop"
-                alt="SÜSELİ Stüdyo"
+                src="/gorseller/hakkimizda.jpg"
+                alt=""
                 fill
                 className="object-cover"
               />
@@ -995,8 +995,10 @@ function Instagram({ instagram }: { instagram: string }) {
               transition={{ duration: 1, delay: 0.1 }}
               className="text-[#E3E3DB] text-4xl md:text-6xl lg:text-7xl font-light leading-[0.95] tracking-[-0.03em]"
             >
-              Atölyeden
-              <span className="italic text-[#E3E3DB]/40"> anlar.</span>
+              {/* Eskiden "Atölyeden anlar." yazıyordu ama kareler atölye
+                  fotoğrafı değil; başlık iddiaya uygun hale getirildi. */}
+              Malzeme
+              <span className="italic text-[#E3E3DB]/40"> ve ışık.</span>
             </motion.h2>
           </div>
 

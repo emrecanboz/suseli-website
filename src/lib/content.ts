@@ -67,8 +67,10 @@ export const DEFAULT_SETTINGS: SiteSettings = {
 
 /**
  * Sanity'de kategori tanımlanmadığı sürece kullanılan yedek liste.
- * Görseller geçici stok fotoğraflarıdır; panelden kendi fotoğrafların
- * yüklendiğinde otomatik olarak devre dışı kalır.
+ *
+ * Kapak görselleri ürün fotoğrafı değil, malzeme ve ışık kareleridir
+ * (beton, cam kenarı, yansıma). Panelden kategori kapağı yüklediğinde
+ * bunlar otomatik olarak devre dışı kalır.
  */
 export const FALLBACK_CATEGORIES: CategoryItem[] = [
   {
@@ -78,7 +80,7 @@ export const FALLBACK_CATEGORIES: CategoryItem[] = [
     description:
       "Cam, masif ahşap ve ayna detaylarıyla kurgulanmış ölçeklenebilir yemek masaları.",
     image:
-      "https://images.unsplash.com/photo-1615875605825-5eb9bb5d52ac?w=1400&q=85&auto=format&fit=crop",
+      "/gorseller/kat-yemek-masasi.jpg",
   },
   {
     id: "orta-sehpa",
@@ -87,7 +89,7 @@ export const FALLBACK_CATEGORIES: CategoryItem[] = [
     description:
       "Heykelsi formlar ve düşük profilli minimal silüetlerle tasarlanmış orta sehpalar.",
     image:
-      "https://images.unsplash.com/photo-1567538096630-e0c55bd6374c?w=1400&q=85&auto=format&fit=crop",
+      "/gorseller/kat-orta-sehpa.jpg",
   },
   {
     id: "dekorasyon",
@@ -96,7 +98,7 @@ export const FALLBACK_CATEGORIES: CategoryItem[] = [
     description:
       "Mekânın karakterini tanımlayan, sınırlı sayıda üretilmiş atölye objeleri.",
     image:
-      "https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?w=1400&q=85&auto=format&fit=crop",
+      "/gorseller/kat-dekorasyon.jpg",
   },
   {
     id: "ayna",
@@ -105,7 +107,7 @@ export const FALLBACK_CATEGORIES: CategoryItem[] = [
     description:
       "Mimari oranlara göre tasarlanan, çerçevesiz ve heykelsi ayna koleksiyonu.",
     image:
-      "https://images.unsplash.com/photo-1618220179428-22790b461013?w=1400&q=85&auto=format&fit=crop",
+      "/gorseller/kat-ayna.jpg",
   },
   {
     id: "tasarim",
@@ -114,7 +116,7 @@ export const FALLBACK_CATEGORIES: CategoryItem[] = [
     description:
       "Konseptten üretime — mimari mekânlar için bütüncül iç mekân tasarım hizmeti.",
     image:
-      "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=1400&q=85&auto=format&fit=crop",
+      "/gorseller/kat-tasarim.jpg",
   },
 ];
 
@@ -137,11 +139,18 @@ export const GALLERY_IMAGES = [
   "/gorseller/galeri-6-gece.jpg",
 ];
 
+/**
+ * Instagram şeridi — sahte bir akış göstermiyoruz.
+ *
+ * Buradaki kareler stüdyonun kendi malzeme/ışık çalışmalarıdır; bölüm
+ * başlığı da "atölyeden fotoğraf" iddiası taşımayacak şekilde yazıldı.
+ * Gerçek Instagram gönderileri bağlandığında burası değişecek.
+ */
 export const INSTAGRAM_POSTS = [
-  "https://images.unsplash.com/photo-1554995207-c18c203602cb?w=800&q=85&auto=format&fit=crop",
-  "https://images.unsplash.com/photo-1556228720-195a672e8a03?w=800&q=85&auto=format&fit=crop",
-  "https://images.unsplash.com/photo-1567016526105-22da7c13161a?w=800&q=85&auto=format&fit=crop",
-  "https://images.unsplash.com/photo-1493663284031-b7e3aefcae8e?w=800&q=85&auto=format&fit=crop",
-  "https://images.unsplash.com/photo-1565183997392-2f6f122e5912?w=800&q=85&auto=format&fit=crop",
-  "https://images.unsplash.com/photo-1540574163026-643ea20ade25?w=800&q=85&auto=format&fit=crop",
+  "/gorseller/galeri-1-cam-kenar.jpg",
+  "/gorseller/kat-dekorasyon.jpg",
+  "/gorseller/galeri-4-siva.jpg",
+  "/gorseller/kat-ayna.jpg",
+  "/gorseller/galeri-5-golge.jpg",
+  "/gorseller/kat-tasarim.jpg",
 ];
