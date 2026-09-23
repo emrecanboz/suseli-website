@@ -1159,10 +1159,15 @@ function Footer({
               Stüdyo
             </div>
             <ul className="space-y-3">
-              {["Hakkımızda", "Atölye", "Basın", "Kariyer"].map((c) => (
-                <li key={c}>
-                  <a href="#" className="text-[#E3E3DB]/80 hover:text-[#E3E3DB] text-sm font-light transition-colors">
-                    {c}
+              {/* Basın ve Kariyer kaldırıldı: arkalarında sayfa yoktu (href="#"). */}
+              {[
+                { label: "Hakkımızda", href: "#stüdyo" },
+                { label: "Galeri", href: "#galeri" },
+                { label: "İletişim", href: "#iletişim" },
+              ].map((c) => (
+                <li key={c.label}>
+                  <a href={c.href} className="text-[#E3E3DB]/80 hover:text-[#E3E3DB] text-sm font-light transition-colors">
+                    {c.label}
                   </a>
                 </li>
               ))}
@@ -1226,12 +1231,11 @@ function Footer({
           <div className="text-[#E3E3DB]/40 text-xs font-light">
             © 2026 {siteName} · Tüm hakları saklıdır.
           </div>
+          {/* Kullanım Şartları kaldırıldı (satış/üyelik yok). Gizlilik + KVKK
+              firma bilgileri gelince gerçek sayfaya bağlanacak. */}
           <div className="flex items-center gap-6 text-[#E3E3DB]/40 text-xs font-light">
             <a href="#" className="hover:text-[#E3E3DB] transition-colors">
               Gizlilik
-            </a>
-            <a href="#" className="hover:text-[#E3E3DB] transition-colors">
-              Kullanım Şartları
             </a>
             <a href="#" className="hover:text-[#E3E3DB] transition-colors">
               KVKK
