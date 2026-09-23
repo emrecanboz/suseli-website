@@ -41,6 +41,11 @@ export const metadata: Metadata = {
     index: true,
     follow: true,
   },
+  // Google Search Console sahiplik doğrulaması (HTML etiketi yöntemi).
+  // Silinirse Search Console erişimi kaybolur.
+  verification: {
+    google: "BFtzg4Rcu6CzamJaXYAMemgvePTrdJd9Me-5SrD2W_g",
+  },
 };
 
 export default function RootLayout({
