@@ -2,11 +2,13 @@
  * Site genelinde kullanılan tek kaynak.
  *
  * Domain: suselistudio.com (Spaceship'te kayıtlı, Vercel'e bağlı).
+ * Site www alt adresinde yayında; çıplak alan adı www'ya yönleniyor.
+ * robots, sitemap ve canonical adresler bu yüzden www ile başlar.
  * Farklı bir domaine geçilirse Vercel'de NEXT_PUBLIC_SITE_URL ortam
  * değişkenini tanımlamak yeterli; kodu değiştirmeye gerek yok.
  */
 export const SITE_URL = (
-  process.env.NEXT_PUBLIC_SITE_URL ?? "https://suselistudio.com"
+  process.env.NEXT_PUBLIC_SITE_URL ?? "https://www.suselistudio.com"
 ).replace(/\/$/, "");
 
 export const SITE_NAME = "SÜSELİ Creative Studio";
