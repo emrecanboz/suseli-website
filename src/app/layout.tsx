@@ -59,6 +59,8 @@ export const metadata: Metadata = {
         media: "(prefers-color-scheme: dark)",
       },
     ],
+    // iPhone/iPad "Ana ekrana ekle" ikonu (src/app/apple-icon.png)
+    apple: [{ url: "/apple-icon.png", sizes: "180x180", type: "image/png" }],
   },
   // Google Search Console sahiplik doğrulaması (HTML etiketi yöntemi).
   // Silinirse Search Console erişimi kaybolur.
