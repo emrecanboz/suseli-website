@@ -41,6 +41,25 @@ export const metadata: Metadata = {
     index: true,
     follow: true,
   },
+  // Sekme ikonu: logodaki ters E. Cihaz açık temadaysa koyu kare + mavi E,
+  // koyu temadaysa mavi kare + krem E. (Tema desteği olmayan tarayıcılar
+  // public/favicon.ico'yu kullanır.)
+  icons: {
+    icon: [
+      {
+        url: "/icon-gunduz.png",
+        type: "image/png",
+        sizes: "192x192",
+        media: "(prefers-color-scheme: light)",
+      },
+      {
+        url: "/icon-gece.png",
+        type: "image/png",
+        sizes: "192x192",
+        media: "(prefers-color-scheme: dark)",
+      },
+    ],
+  },
   // Google Search Console sahiplik doğrulaması (HTML etiketi yöntemi).
   // Silinirse Search Console erişimi kaybolur.
   verification: {
