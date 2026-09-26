@@ -82,7 +82,7 @@ export default async function ProductPage({ params }: Params) {
                     fill
                     priority={i === 0}
                     sizes="(max-width: 1024px) 100vw, 50vw"
-                    className={product.isRender ? "object-contain" : "object-cover"}
+                    className={src.startsWith("/cizim/") ? "object-contain" : "object-cover"}
                   />
                 </div>
               ))

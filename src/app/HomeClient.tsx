@@ -620,7 +620,7 @@ function ProductCard({
               src={product.image}
               alt={product.title}
               className={`w-full h-full ${
-                product.isRender ? "object-contain" : "object-cover"
+                product.image.startsWith("/cizim/") ? "object-contain" : "object-cover"
               }`}
             />
           ) : (

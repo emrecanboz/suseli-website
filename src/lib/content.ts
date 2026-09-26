@@ -172,6 +172,25 @@ export const INSTAGRAM_POSTS = [
  */
 export const FALLBACK_PRODUCTS: ProductItem[] = [
   {
+    // Atölyede gerçekten üretilmiş bir parça. Görseli, dükkânda çekilen
+    // fotoğraftan yapay zekâ ile arka planı temizlenerek üretildi; bu yüzden
+    // şimdilik "Tasarım görseli" etiketiyle duruyor. Stüdyo çekimi gelince
+    // isRender false yapılacak.
+    id: "koleksiyon-sekiz",
+    slug: "sekiz",
+    title: "SEKİZ",
+    category: "Yemek Masası",
+    categorySlug: "yemek-masasi",
+    description:
+      "Sekizgen cam tabla, birbirine geçen üç cam panelin üzerinde durur. Üstten bakıldığında ayak bir çark gibi döner; yandan bakıldığında neredeyse görünmez olur. Mutfak ve yemek alanları için.",
+    image: "/urun/sekiz.jpg",
+    images: ["/urun/sekiz.jpg"],
+    isRender: true,
+    price: "",
+    materials: "",
+    dimensions: "",
+  },
+  {
     id: "koleksiyon-aks",
     slug: "aks",
     title: "AKS",
@@ -309,4 +328,4 @@ export const FALLBACK_PRODUCTS: ProductItem[] = [
 ];
 
 /** Ana sayfada öne çıkan yedek parçalar — her kategoriden biri. */
-export const FALLBACK_FEATURED_SLUGS = ["aks", "katman", "ufuk", "menzil"];
+export const FALLBACK_FEATURED_SLUGS = ["sekiz", "aks", "katman", "ufuk", "menzil"];
