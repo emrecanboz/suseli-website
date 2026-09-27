@@ -39,3 +39,7 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# Claude push koprusu (yerel tetik ve kayit dosyalari)
+.claude-push
+.claude-push-log.txt
