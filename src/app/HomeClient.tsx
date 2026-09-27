@@ -409,7 +409,9 @@ function CategoryCard({
         index === 0 ? "md:col-span-2 lg:col-span-2 lg:row-span-2" : ""
       }`}
     >
-      <div className={`relative ${index === 0 ? "h-[500px] md:h-[640px]" : "h-[460px]"} w-full overflow-hidden`}>
+      {/* İlk kart geniş ekranda iki satır kaplıyor (row-span-2); görsel alanı
+          da kartın tamamını doldurmalı, yoksa altta gri boşluk kalıyor. */}
+      <div className={`relative ${index === 0 ? "h-[500px] md:h-[640px] lg:h-full" : "h-[460px]"} w-full overflow-hidden`}>
         <motion.div
           animate={{ scale: hovered ? 1.08 : 1 }}
           transition={{ duration: 1.2, ease: [0.22, 1, 0.36, 1] }}

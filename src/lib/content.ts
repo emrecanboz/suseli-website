@@ -90,8 +90,10 @@ export const FALLBACK_CATEGORIES: CategoryItem[] = [
     subtitle: "01 — Sofra Mimarisi",
     description:
       "Cam, masif ahşap ve ayna detaylarıyla kurgulanmış ölçeklenebilir yemek masaları.",
-    // SEKİZ'in görselinden yatay kırpım; kenarlara düz fon eklenerek masa
-    // kartın geniş formatına sığdırıldı (dört ayak pabucu da görünür).
+    // SEKİZ'in görselinden kare kapak: masanın etrafına düz fon eklendi.
+    // Bu kart ekrana göre yatay (tablet), kareye yakın (geniş ekran) ya da
+    // dikey (telefon) oluyor; kare + bol boşluk her durumda masayı kesmeden
+    // gösteriyor.
     image: "/urun/sekiz-kapak.jpg",
   },
   {
