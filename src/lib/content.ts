@@ -79,9 +79,9 @@ export const DEFAULT_SETTINGS: SiteSettings = {
 /**
  * Sanity'de kategori tanımlanmadığı sürece kullanılan yedek liste.
  *
- * Kapak görselleri ürün fotoğrafı değil, malzeme ve ışık kareleridir
- * (beton, cam kenarı, yansıma). Panelden kategori kapağı yüklediğinde
- * bunlar otomatik olarak devre dışı kalır.
+ * Yemek Masası kapağı SEKİZ'dir; diğerleri şimdilik malzeme ve ışık
+ * kareleri (beton, cam kenarı, yansıma). Panelden kategori kapağı
+ * yüklediğinde bunlar otomatik olarak devre dışı kalır.
  */
 export const FALLBACK_CATEGORIES: CategoryItem[] = [
   {
@@ -90,8 +90,9 @@ export const FALLBACK_CATEGORIES: CategoryItem[] = [
     subtitle: "01 — Sofra Mimarisi",
     description:
       "Cam, masif ahşap ve ayna detaylarıyla kurgulanmış ölçeklenebilir yemek masaları.",
-    image:
-      "/gorseller/kat-yemek-masasi.jpg",
+    // SEKİZ'in görselinden yatay kırpım; kenarlara düz fon eklenerek masa
+    // kartın geniş formatına sığdırıldı (dört ayak pabucu da görünür).
+    image: "/urun/sekiz-kapak.jpg",
   },
   {
     id: "orta-sehpa",

@@ -433,6 +433,8 @@ function CategoryCard({
         </motion.div>
 
         <div className="absolute inset-0 bg-gradient-to-t from-[#0a0a0a] via-[#0a0a0a]/30 to-transparent" />
+        {/* Üst kenar: açık renkli kapaklarda sol üstteki alt başlık okunsun. */}
+        <div className="absolute inset-x-0 top-0 h-40 bg-gradient-to-b from-[#0a0a0a]/60 to-transparent" />
 
         {/* Hover glass overlay */}
         <motion.div
