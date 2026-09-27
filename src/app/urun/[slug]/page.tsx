@@ -38,11 +38,18 @@ export default async function ProductPage({ params }: Params) {
 
   if (!product) notFound();
 
-  const specs = [
-    { label: "Malzeme", value: product.materials },
-    { label: "Ölçüler", value: product.dimensions },
-    { label: "Fiyat", value: product.price || "Talep Üzerine" },
-  ].filter((s) => s.value);
+  // Teknik detay listesi doluysa onu, değilse Malzeme/Ölçüler'i göster.
+  // Boş satır hiç gösterilmez; Fiyat her zaman en altta.
+  const fiyat = { label: "Fiyat", value: product.price || "Talep Üzerine" };
+  const detaylar = (product.specs ?? []).filter((s) => s.label && s.value);
+  const specs =
+    detaylar.length > 0
+      ? [...detaylar, fiyat]
+      : [
+          { label: "Malzeme", value: product.materials },
+          { label: "Ölçüler", value: product.dimensions },
+          fiyat,
+        ].filter((s) => s.value);
 
   return (
     <main className="min-h-screen bg-[#0a0a0a] text-[#E3E3DB] antialiased selection:bg-[#0243C7] selection:text-[#E3E3DB]">
@@ -99,8 +106,7 @@ export default async function ProductPage({ params }: Params) {
             {product.isRender && product.images.length > 0 && (
               <p className="text-[#E3E3DB]/40 text-[11px] leading-relaxed pt-1">
                 Bu parça sipariş üzerine üretilir. Görseller tasarım
-                görselidir; ölçü, cam rengi ve ahşap seçimi projeye göre
-                belirlenir.
+                görselidir; ölçü ve malzeme seçimi projeye göre belirlenir.
               </p>
             )}
           </div>
@@ -118,7 +124,7 @@ export default async function ProductPage({ params }: Params) {
             </h1>
 
             {product.description && (
-              <p className="text-[#E3E3DB]/70 text-base md:text-lg font-light leading-relaxed mb-12 max-w-xl">
+              <p className="text-[#E3E3DB]/70 text-base md:text-lg font-light leading-relaxed mb-12 max-w-xl whitespace-pre-line">
                 {product.description}
               </p>
             )}
@@ -133,7 +139,7 @@ export default async function ProductPage({ params }: Params) {
                     <dt className="text-[#E3E3DB]/40 text-[10px] tracking-[0.25em] uppercase">
                       {s.label}
                     </dt>
-                    <dd className="text-[#E3E3DB] text-sm md:text-base font-light text-right">
+                    <dd className="text-[#E3E3DB] text-sm md:text-base font-light text-right max-w-[65%]">
                       {s.value}
                     </dd>
                   </div>

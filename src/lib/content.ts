@@ -28,6 +28,12 @@ export interface CategoryItem {
   image: string;
 }
 
+/** Ürün sayfasındaki teknik detay satırı. */
+export interface ProductSpec {
+  label: string;
+  value: string;
+}
+
 export interface ProductItem {
   id: string;
   /** Adres parçası — /urun/<slug> */
@@ -46,6 +52,11 @@ export interface ProductItem {
    * render'ı fotoğraf gibi sunmayız.
    */
   isRender: boolean;
+  /**
+   * Doluysa ürün sayfasında Malzeme/Ölçüler yerine bu liste gösterilir.
+   * Fiyat satırı her zaman en alta ayrıca eklenir.
+   */
+  specs?: ProductSpec[];
   /** Aşağıdakiler boşsa sitede hiç gösterilmez. */
   price: string;
   materials: string;
@@ -181,14 +192,33 @@ export const FALLBACK_PRODUCTS: ProductItem[] = [
     title: "SEKİZ",
     category: "Yemek Masası",
     categorySlug: "yemek-masasi",
+    // İlk cümle kartlarda da görünür (2-3 satır), en güçlü cümle başta.
+    // Paragraflar \n\n ile ayrılır; ürün sayfası satır sonlarını korur.
     description:
-      "Sekizgen cam tabla, birbirine geçen üç cam panelin üzerinde durur. Üstten bakıldığında ayak bir çark gibi döner; yandan bakıldığında neredeyse görünmez olur. Mutfak ve yemek alanları için.",
+      "Sekiz kenarlı cam tabla, birbirine geçen üç cam panelin üzerinde durur. Üstten bakıldığında ayaklar bir çark gibi döner; yandan bakıldığında neredeyse kaybolur, tabla havada asılı gibi görünür.\n\nMutfakta sabah kahvesine, yemek odasında kalabalık bir sofraya aynı sadelikle eşlik eder. Sekizgen formu sayesinde masada kimse köşeye sıkışmaz.",
     image: "/urun/sekiz.jpg",
     images: ["/urun/sekiz.jpg"],
     isRender: true,
     price: "",
-    materials: "",
-    dimensions: "",
+    // Aşağıdaki tüm teknik bilgiler kullanıcıdan (27 Eylül). Cam temperli
+    // değil — bu bilerek yazılmadı ("temperli" yazmak yanlış olurdu).
+    // Bakım satırındaki sıcak kap uyarısı bu yüzden önemli: temperli
+    // olmayan cam ani ısı farkında çatlayabilir.
+    materials: "15 mm cam — tabla ve ayaklar",
+    dimensions: "Genişlik 120 cm · Yükseklik 76 cm",
+    specs: [
+      { label: "Ölçüler", value: "Genişlik 120 cm · Yükseklik 76 cm" },
+      { label: "Malzeme", value: "15 mm cam — tabla ve ayaklar" },
+      { label: "Renk", value: "Şeffaf · Folyo uygulamasıyla farklı renk seçenekleri" },
+      { label: "Kapasite", value: "4–6 kişi" },
+      { label: "Özel üretim", value: "Ölçü ve renk isteğe göre uyarlanır" },
+      { label: "Teslim süresi", value: "3–4 hafta" },
+      {
+        label: "Bakım",
+        value:
+          "Yumuşak bez ve cam temizleyiciyle silinir. Sıcak kapları doğrudan cama koymayın.",
+      },
+    ],
   },
   {
     id: "koleksiyon-aks",

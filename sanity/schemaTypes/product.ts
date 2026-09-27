@@ -87,6 +87,26 @@ export const product = defineType({
       description:
         "Örn. 180 × 90 × 75 cm. Ölçüyü bilmiyorsan boş bırak.",
     }),
+    defineField({
+      name: "specs",
+      title: "Teknik detaylar (isteğe bağlı)",
+      description:
+        "Doldurursan ürün sayfasında Malzeme/Ölçüler yerine bu liste " +
+        "gösterilir (Fiyat her zaman en altta). Örn. Teslim süresi → 3–4 hafta. " +
+        "Emin olmadığın bilgiyi yazma.",
+      type: "array",
+      of: [
+        {
+          type: "object",
+          name: "spec",
+          fields: [
+            defineField({ name: "label", title: "Başlık", type: "string" }),
+            defineField({ name: "value", title: "Değer", type: "string" }),
+          ],
+          preview: { select: { title: "label", subtitle: "value" } },
+        },
+      ],
+    }),
 
     defineField({
       name: "featured",

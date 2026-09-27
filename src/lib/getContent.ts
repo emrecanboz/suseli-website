@@ -53,6 +53,7 @@ interface RawProduct {
   materials?: string;
   dimensions?: string;
   isRender?: boolean;
+  specs?: { label?: string; value?: string }[];
   categoryTitle?: string;
   categorySlug?: string;
   images?: Image[];
@@ -88,6 +89,9 @@ function toProduct(p: RawProduct): ProductItem | null {
     image: images[0] ?? null,
     images,
     isRender: p.isRender === true,
+    specs: (p.specs ?? [])
+      .filter((s) => s.label && s.value)
+      .map((s) => ({ label: s.label as string, value: s.value as string })),
     price: p.price ?? "",
     materials: p.materials ?? "",
     dimensions: p.dimensions ?? "",
