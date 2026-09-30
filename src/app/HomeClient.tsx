@@ -448,7 +448,7 @@ function CategoryCard({
         <motion.div
           animate={{ opacity: hovered ? 1 : 0 }}
           transition={{ duration: 0.5 }}
-          className="absolute inset-0 backdrop-blur-[2px] bg-[#0243C7]/[0.08]"
+          className="absolute inset-0 bg-[#0243C7]/[0.08]"
         />
 
         {/* Content */}
@@ -1055,7 +1055,7 @@ function Instagram({ instagram }: { instagram: string }) {
                 <Image src={src} alt="" fill sizes="(min-width: 1024px) 16vw, (min-width: 768px) 33vw, 50vw" className="object-cover" />
               </motion.div>
 
-              <div className="absolute inset-0 bg-[#0243C7]/0 group-hover:bg-[#0243C7]/40 backdrop-blur-0 group-hover:backdrop-blur-sm transition-all duration-500 flex items-center justify-center">
+              <div className="absolute inset-0 bg-[#0243C7]/0 group-hover:bg-[#0243C7]/40 transition-all duration-500 flex items-center justify-center">
                 <svg
                   className="opacity-0 group-hover:opacity-100 transition-opacity duration-500"
                   width="28"
