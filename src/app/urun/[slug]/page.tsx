@@ -50,13 +50,19 @@ export default async function ProductPage({ params }: Params) {
   // Teknik detay listesi doluysa onu, değilse Malzeme/Ölçüler'i göster.
   // Boş satır hiç gösterilmez; Fiyat her zaman en altta.
   const fiyat = { label: "Fiyat", value: product.price || "Talep Üzerine" };
-  const detaylar = (product.specs ?? []).filter((s) => s.label && s.value);
+  // Teslimat bilgisi tüm ürünlerde aynı (kullanıcıdan, 1 Ekim 2026):
+  // şimdilik yalnız Bursa içi, kapıya teslim, fiyata dahil.
+  const teslimat = { label: "Teslimat", value: "Bursa içi · Kapıya teslim, fiyata dahil" };
+  const detaylar = (product.specs ?? []).filter(
+    (s) => s.label && s.value && s.label.toLocaleLowerCase("tr-TR") !== "teslimat",
+  );
   const specs =
     detaylar.length > 0
-      ? [...detaylar, fiyat]
+      ? [...detaylar, teslimat, fiyat]
       : [
           { label: "Malzeme", value: product.materials },
           { label: "Ölçüler", value: product.dimensions },
+          teslimat,
           fiyat,
         ].filter((s) => s.value);
 
