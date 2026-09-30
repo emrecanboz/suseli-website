@@ -6,6 +6,8 @@
  * yönteminde görünmüyordu).
  */
 import HomeClient from "./HomeClient";
+import JsonLd from "./JsonLd";
+import { SITE_DESCRIPTION, SITE_NAME, SITE_URL } from "@/lib/site";
 import {
   getCategories,
   getFeaturedProducts,
@@ -23,11 +25,47 @@ export default async function Page() {
     getFeaturedProducts(),
   ]);
 
+  // Google için: işletme (Bursa, 2023, iletişim) + site adı.
+  // Açık adres bilinmediği için sadece şehir/ülke yazılıyor — uydurulmuyor.
+  const yapilandirilmisVeri = {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "WebSite",
+        "@id": `${SITE_URL}/#site`,
+        name: SITE_NAME,
+        url: SITE_URL,
+        inLanguage: "tr-TR",
+      },
+      {
+        "@type": "FurnitureStore",
+        "@id": `${SITE_URL}/#isletme`,
+        name: SITE_NAME,
+        description: SITE_DESCRIPTION,
+        url: SITE_URL,
+        logo: `${SITE_URL}/icon-gunduz.png`,
+        image: `${SITE_URL}/urun/sekiz-kapak.jpg`,
+        foundingDate: "2023",
+        telephone: settings.whatsapp ? `+${settings.whatsapp}` : undefined,
+        email: settings.email || undefined,
+        address: {
+          "@type": "PostalAddress",
+          addressLocality: "Bursa",
+          addressCountry: "TR",
+        },
+        sameAs: [settings.instagram].filter(Boolean),
+      },
+    ],
+  };
+
   return (
-    <HomeClient
-      settings={settings}
-      categories={categories}
-      featured={featured}
-    />
+    <>
+      <JsonLd data={yapilandirilmisVeri} />
+      <HomeClient
+        settings={settings}
+        categories={categories}
+        featured={featured}
+      />
+    </>
   );
 }

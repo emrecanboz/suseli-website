@@ -12,7 +12,9 @@ import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 
+import JsonLd from "../../JsonLd";
 import { getProduct, getSettings } from "@/lib/getContent";
+import { SITE_NAME, SITE_URL } from "@/lib/site";
 
 export const revalidate = 60;
 
@@ -51,8 +53,49 @@ export default async function ProductPage({ params }: Params) {
           fiyat,
         ].filter((s) => s.value);
 
+  // Google için ürün + gezinti yolu. Fiyat yok (Talep Üzerine) — uydurulmaz.
+  const urunUrl = `${SITE_URL}/urun/${product.slug}`;
+  const mutlak = (src: string) => (src.startsWith("http") ? src : `${SITE_URL}${src}`);
+  const malzeme =
+    detaylar.find((s) => s.label === "Malzeme")?.value || product.materials || undefined;
+  const gezinti = [
+    { name: "Ana Sayfa", item: SITE_URL },
+    ...(product.category
+      ? [{ name: product.category, item: `${SITE_URL}/kategori/${product.categorySlug}` }]
+      : []),
+    { name: product.title, item: urunUrl },
+  ];
+  const yapilandirilmisVeri = {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "Product",
+        "@id": `${urunUrl}#urun`,
+        name: product.title,
+        description: product.description.replace(/\s*\n+\s*/g, " ") || undefined,
+        image: product.images.map(mutlak),
+        url: urunUrl,
+        category: product.category || undefined,
+        material: malzeme,
+        brand: { "@type": "Brand", name: "SÜSELİ" },
+        manufacturer: { "@type": "Organization", name: SITE_NAME, url: SITE_URL },
+      },
+      {
+        "@type": "BreadcrumbList",
+        itemListElement: gezinti.map((g, i) => ({
+          "@type": "ListItem",
+          position: i + 1,
+          name: g.name,
+          item: g.item,
+        })),
+      },
+    ],
+  };
+
   return (
     <main className="min-h-screen bg-[#0a0a0a] text-[#E3E3DB] antialiased selection:bg-[#0243C7] selection:text-[#E3E3DB]">
+      <JsonLd data={yapilandirilmisVeri} />
+
       {/* Üst bar */}
       <div className="border-b border-white/[0.06]">
         <div className="max-w-[1600px] mx-auto px-6 md:px-12 py-6 flex items-center justify-between">
