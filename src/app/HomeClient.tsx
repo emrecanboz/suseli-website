@@ -170,6 +170,7 @@ function Hero({ title, subtitle }: { title: string; subtitle: string }) {
           alt=""
           fill
           priority
+          sizes="100vw"
           className="object-cover"
         />
         <div className="absolute inset-0 bg-gradient-to-b from-[#0a0a0a]/70 via-[#0a0a0a]/30 to-[#0a0a0a]" />
@@ -422,6 +423,11 @@ function CategoryCard({
               src={category.image}
               alt={category.title}
               fill
+              sizes={
+                index === 0
+                  ? "(min-width: 1024px) 66vw, 100vw"
+                  : "(min-width: 1024px) 33vw, (min-width: 768px) 50vw, 100vw"
+              }
               className="object-cover"
             />
           ) : (
@@ -744,29 +750,29 @@ function Gallery() {
 
         <div className="grid grid-cols-12 gap-4 md:gap-6">
           <motion.div style={{ y: y1 }} className="col-span-12 md:col-span-7 relative h-[400px] md:h-[680px] rounded-2xl overflow-hidden">
-            <Image src={GALLERY_IMAGES[0]} alt="" fill className="object-cover" />
+            <Image src={GALLERY_IMAGES[0]} alt="" fill sizes="(min-width: 768px) 58vw, 100vw" className="object-cover" />
             <div className="absolute inset-0 bg-gradient-to-tr from-[#0a0a0a]/40 to-transparent" />
           </motion.div>
 
           <motion.div style={{ y: y2 }} className="col-span-12 md:col-span-5 grid grid-cols-1 gap-4 md:gap-6">
             <div className="relative h-[300px] md:h-[330px] rounded-2xl overflow-hidden">
-              <Image src={GALLERY_IMAGES[1]} alt="" fill className="object-cover" />
+              <Image src={GALLERY_IMAGES[1]} alt="" fill sizes="(min-width: 768px) 42vw, 100vw" className="object-cover" />
             </div>
             <div className="relative h-[300px] md:h-[330px] rounded-2xl overflow-hidden">
-              <Image src={GALLERY_IMAGES[2]} alt="" fill className="object-cover" />
+              <Image src={GALLERY_IMAGES[2]} alt="" fill sizes="(min-width: 768px) 42vw, 100vw" className="object-cover" />
             </div>
           </motion.div>
 
           <motion.div style={{ y: y2 }} className="col-span-6 md:col-span-4 relative h-[280px] md:h-[440px] rounded-2xl overflow-hidden">
-            <Image src={GALLERY_IMAGES[3]} alt="" fill className="object-cover" />
+            <Image src={GALLERY_IMAGES[3]} alt="" fill sizes="(min-width: 768px) 33vw, 50vw" className="object-cover" />
           </motion.div>
 
           <motion.div style={{ y: y1 }} className="col-span-6 md:col-span-4 relative h-[280px] md:h-[440px] rounded-2xl overflow-hidden">
-            <Image src={GALLERY_IMAGES[4]} alt="" fill className="object-cover" />
+            <Image src={GALLERY_IMAGES[4]} alt="" fill sizes="(min-width: 768px) 33vw, 50vw" className="object-cover" />
           </motion.div>
 
           <motion.div style={{ y: y2 }} className="col-span-12 md:col-span-4 relative h-[280px] md:h-[440px] rounded-2xl overflow-hidden">
-            <Image src={GALLERY_IMAGES[5]} alt="" fill className="object-cover" />
+            <Image src={GALLERY_IMAGES[5]} alt="" fill sizes="(min-width: 768px) 33vw, 100vw" className="object-cover" />
             <div className="absolute inset-0 backdrop-blur-sm bg-[#0243C7]/20 flex flex-col items-center justify-center text-center px-6">
               <span className="text-[#E3E3DB]/60 text-[10px] tracking-[0.3em] uppercase mb-3">
                 Daha fazlası
@@ -813,6 +819,7 @@ function About() {
                 src="/gorseller/hakkimizda.jpg"
                 alt=""
                 fill
+                sizes="(min-width: 1024px) 42vw, 100vw"
                 className="object-cover"
               />
             </div>
@@ -1045,7 +1052,7 @@ function Instagram({ instagram }: { instagram: string }) {
                 transition={{ duration: 1, ease: [0.22, 1, 0.36, 1] }}
                 className="absolute inset-0"
               >
-                <Image src={src} alt="" fill className="object-cover" />
+                <Image src={src} alt="" fill sizes="(min-width: 1024px) 16vw, (min-width: 768px) 33vw, 50vw" className="object-cover" />
               </motion.div>
 
               <div className="absolute inset-0 bg-[#0243C7]/0 group-hover:bg-[#0243C7]/40 backdrop-blur-0 group-hover:backdrop-blur-sm transition-all duration-500 flex items-center justify-center">
