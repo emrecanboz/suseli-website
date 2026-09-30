@@ -70,7 +70,7 @@ export const DEFAULT_SETTINGS: SiteSettings = {
   whatsapp: "905333896916",
   instagram: "https://instagram.com/suseli.studio",
   email: "info@suseli.studio",
-  address: "Bursa · Türkiye",
+  address: "Reyhan Mah. 3. Hoşgör Sk. No: 6/1, Osmangazi / Bursa",
   footerText:
     "Bursa merkezli, mimari oranlarda parça üreten yaratıcı stüdyo. Her tasarım atölyemizde ellerimizle hayata geçer.",
   logo: null,

@@ -48,9 +48,13 @@ export default async function Page() {
         foundingDate: "2023",
         telephone: settings.whatsapp ? `+${settings.whatsapp}` : undefined,
         email: settings.email || undefined,
+        // Atölye adresi (kullanıcıdan, 1 Ekim 2026) — Google İşletme
+        // Profili'ndeki adresle aynı olmalı.
         address: {
           "@type": "PostalAddress",
-          addressLocality: "Bursa",
+          streetAddress: "Reyhan Mah. 3. Hoşgör Sk. No: 6/1",
+          addressLocality: "Osmangazi",
+          addressRegion: "Bursa",
           addressCountry: "TR",
         },
         sameAs: [settings.instagram].filter(Boolean),
