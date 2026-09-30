@@ -82,7 +82,7 @@ function Navigation({
           {["Koleksiyon", "Galeri", "Stüdyo", "İletişim"].map((item, i) => (
             <motion.a
               key={item}
-              href={`#${item.toLowerCase()}`}
+              href={`#${item.toLocaleLowerCase("tr-TR")}`}
               initial={{ opacity: 0, y: -10 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.3 + i * 0.1, duration: 0.8 }}
@@ -127,7 +127,7 @@ function Navigation({
               {["Koleksiyon", "Galeri", "Stüdyo", "İletişim"].map((item) => (
                 <a
                   key={item}
-                  href={`#${item.toLowerCase()}`}
+                  href={`#${item.toLocaleLowerCase("tr-TR")}`}
                   onClick={() => setMenuOpen(false)}
                   className="text-[#E3E3DB] text-lg tracking-[0.2em] uppercase"
                 >

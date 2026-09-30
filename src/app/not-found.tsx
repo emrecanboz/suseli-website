@@ -3,6 +3,7 @@
  * Olmayan bir adrese girildiğinde (ya da silinmiş bir ürüne gidildiğinde)
  * ziyaretçiyi kaybetmek yerine koleksiyona ve WhatsApp'a yönlendirir.
  */
+import Image from "next/image";
 import Link from "next/link";
 
 import { getSettings } from "@/lib/getContent";
@@ -13,12 +14,17 @@ export default async function NotFound() {
   return (
     <main className="min-h-screen bg-[#0a0a0a] text-[#E3E3DB] antialiased flex flex-col selection:bg-[#0243C7] selection:text-[#E3E3DB]">
       <div className="border-b border-white/[0.06]">
-        <div className="max-w-[1600px] mx-auto px-6 md:px-12 py-6">
-          <Link
-            href="/"
-            className="text-[#E3E3DB] text-lg font-semibold tracking-[0.25em] uppercase"
-          >
-            SÜSEL<span className="text-[#0243C7]">İ</span>
+        <div className="max-w-[1600px] mx-auto px-6 md:px-12 py-5">
+          <Link href="/" className="inline-flex items-center">
+            <Image
+              src="/logo.png"
+              alt="SÜSELİ"
+              width={628}
+              height={216}
+              priority
+              sizes="128px"
+              style={{ height: "36px", width: "auto", objectFit: "contain", display: "block" }}
+            />
           </Link>
         </div>
       </div>

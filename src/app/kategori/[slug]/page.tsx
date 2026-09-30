@@ -7,7 +7,7 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 
 import CategoryClient from "./CategoryClient";
-import { getCategory, getProductsByCategory } from "@/lib/getContent";
+import { getCategory, getProductsByCategory, getSettings } from "@/lib/getContent";
 
 export const revalidate = 60;
 
@@ -27,13 +27,14 @@ export async function generateMetadata({ params }: Params): Promise<Metadata> {
 export default async function CategoryPage({ params }: Params) {
   const { slug } = await params;
 
-  const [meta, products] = await Promise.all([
+  const [meta, products, settings] = await Promise.all([
     getCategory(slug),
     getProductsByCategory(slug),
+    getSettings(),
   ]);
 
   // Tanımsız bir kategori adresi artık boş sayfa değil, düzgün 404 döner.
   if (!meta) notFound();
 
-  return <CategoryClient meta={meta} products={products} />;
+  return <CategoryClient meta={meta} products={products} whatsapp={settings.whatsapp} />;
 }

@@ -19,9 +19,11 @@ import type { CategoryItem, ProductItem } from "@/lib/content";
 export default function CategoryClient({
   meta,
   products,
+  whatsapp,
 }: {
   meta: CategoryItem;
   products: ProductItem[];
+  whatsapp: string;
 }) {
   const loaded = true;
 
@@ -29,16 +31,25 @@ export default function CategoryClient({
     <main className="min-h-screen bg-[#0a0a0a] text-[#E3E3DB] antialiased overflow-x-hidden selection:bg-[#0243C7] selection:text-[#E3E3DB]"
       style={{ fontFamily: "var(--font-geist-sans, 'Inter', sans-serif)" }}
     >
-      <TopBar />
+      <TopBar whatsapp={whatsapp} />
       <CategoryHero meta={meta} />
-      <ProductGrid products={products} loaded={loaded} meta={meta} />
-      <BottomCTA />
+      <ProductGrid products={products} loaded={loaded} meta={meta} whatsapp={whatsapp} />
+      <BottomCTA whatsapp={whatsapp} />
     </main>
   );
 }
 
 // ── Top bar ───────────────────────────────────────────────────────────────
-function TopBar() {
+// Ürün sayfası da bunu kullanır: geri linki oradan kategoriye döner.
+export function TopBar({
+  whatsapp,
+  backHref = "/",
+  backLabel = "Ana Sayfa",
+}: {
+  whatsapp: string;
+  backHref?: string;
+  backLabel?: string;
+}) {
   const [scrolled, setScrolled] = useState(false);
 
   useEffect(() => {
@@ -60,8 +71,8 @@ function TopBar() {
     >
       <div className="max-w-[1600px] mx-auto px-6 md:px-12 py-5 flex items-center justify-between">
         {/* Back */}
-        <motion.a
-          href="/"
+        <MotionLink
+          href={backHref}
           whileHover={{ x: -4 }}
           transition={{ duration: 0.3 }}
           className="flex items-center gap-3 text-[#E3E3DB]/70 hover:text-[#E3E3DB] text-xs tracking-[0.25em] uppercase transition-colors duration-300"
@@ -75,8 +86,8 @@ function TopBar() {
               strokeLinejoin="round"
             />
           </svg>
-          Ana Sayfa
-        </motion.a>
+          {backLabel}
+        </MotionLink>
 
         {/* Logo */}
         <motion.a
@@ -98,7 +109,7 @@ function TopBar() {
 
         {/* WhatsApp pill */}
         <motion.a
-          href="https://wa.me/905333896916"
+          href={`https://wa.me/${whatsapp}`}
           whileHover={{ scale: 1.04 }}
           className="hidden md:flex items-center gap-2 px-5 py-2.5 rounded-full bg-[#E3E3DB]/[0.04] border border-[#E3E3DB]/10 text-[#E3E3DB] text-xs tracking-[0.2em] uppercase"
         >
@@ -206,10 +217,12 @@ function ProductGrid({
   products,
   loaded,
   meta,
+  whatsapp,
 }: {
   products: ProductItem[];
   loaded: boolean;
   meta: { title: string };
+  whatsapp: string;
 }) {
   const ref = useRef(null);
   const inView = useInView(ref, { once: true, amount: 0.05 });
@@ -291,18 +304,21 @@ function ProductGrid({
                 </svg>
               </div>
               <p className="text-[#E3E3DB]/40 text-sm tracking-[0.3em] uppercase mb-3">
-                Bu kategoride henüz ürün yok
+                Bu kategorideki parçalar hazırlanıyor
               </p>
+              {/* Eskiden ziyaretçiye "Admin Panele Git" (/admin → 404)
+                  gösteriyordu. */}
               <p className="text-[#E3E3DB]/25 text-xs max-w-xs leading-relaxed">
-                Admin panelinden ürün ekleyerek bu sayfayı doldurun.
+                Her parça sipariş üzerine üretilir. Aklınızdaki parçayı bize
+                yazın, birlikte tasarlayalım.
               </p>
-              <MotionLink
-                href="/admin"
+              <motion.a
+                href={`https://wa.me/${whatsapp}`}
                 whileHover={{ scale: 1.04 }}
                 className="mt-10 px-8 py-3.5 rounded-full border border-[#E3E3DB]/15 text-[#E3E3DB]/60 text-xs tracking-[0.25em] uppercase hover:border-[#0243C7] hover:text-[#E3E3DB] transition-all duration-500"
               >
-                Admin Panele Git
-              </MotionLink>
+                WhatsApp ile Sor
+              </motion.a>
             </motion.div>
           ) : (
             // Product grid
@@ -486,8 +502,42 @@ function ProductCard({
   );
 }
 
+// ── Diğer parçalar (ürün sayfasının altı) ─────────────────────────────────
+export function DigerParcalar({
+  products,
+  title,
+}: {
+  products: ProductItem[];
+  title: string;
+}) {
+  const ref = useRef(null);
+  const inView = useInView(ref, { once: true, amount: 0.1 });
+  if (products.length === 0) return null;
+
+  return (
+    <section ref={ref} className="relative py-24 md:py-32 bg-[#0a0a0a] border-t border-white/[0.04]">
+      <div className="max-w-[1600px] mx-auto px-6 md:px-12">
+        <div className="flex items-center gap-3 mb-6">
+          <span className="w-10 h-px bg-[#0243C7]" />
+          <span className="text-[#E3E3DB]/50 text-xs tracking-[0.4em] uppercase">
+            {title}
+          </span>
+        </div>
+        <h2 className="text-[#E3E3DB] text-3xl md:text-5xl font-light tracking-[-0.03em] mb-12 md:mb-16">
+          Diğer parçalar
+        </h2>
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
+          {products.map((product, i) => (
+            <ProductCard key={product.id} product={product} index={i} inView={inView} />
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
 // ── Bottom CTA ────────────────────────────────────────────────────────────
-function BottomCTA() {
+export function BottomCTA({ whatsapp }: { whatsapp: string }) {
   const ref = useRef(null);
   const inView = useInView(ref, { once: true, amount: 0.3 });
 
@@ -537,7 +587,7 @@ function BottomCTA() {
           <motion.a
             whileHover={{ scale: 1.03 }}
             whileTap={{ scale: 0.97 }}
-            href="https://wa.me/905333896916"
+            href={`https://wa.me/${whatsapp}`}
             className="flex items-center gap-4 px-8 py-4 rounded-full bg-[#0243C7] text-[#E3E3DB] text-xs tracking-[0.2em] uppercase font-medium"
           >
             <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">

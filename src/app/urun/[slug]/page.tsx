@@ -9,11 +9,11 @@
  */
 import type { Metadata } from "next";
 import Image from "next/image";
-import Link from "next/link";
 import { notFound } from "next/navigation";
 
 import JsonLd from "../../JsonLd";
-import { getProduct, getSettings } from "@/lib/getContent";
+import { BottomCTA, DigerParcalar, TopBar } from "../../kategori/[slug]/CategoryClient";
+import { getProduct, getProductsByCategory, getSettings } from "@/lib/getContent";
 import { SITE_NAME, SITE_URL } from "@/lib/site";
 
 export const revalidate = 60;
@@ -39,6 +39,13 @@ export default async function ProductPage({ params }: Params) {
   const [product, settings] = await Promise.all([getProduct(slug), getSettings()]);
 
   if (!product) notFound();
+
+  // Aynı kategoriden en fazla 3 parça — sayfa "WhatsApp ile Sor"da bitmesin.
+  const digerleri = product.categorySlug
+    ? (await getProductsByCategory(product.categorySlug))
+        .filter((p) => p.slug !== product.slug)
+        .slice(0, 3)
+    : [];
 
   // Teknik detay listesi doluysa onu, değilse Malzeme/Ölçüler'i göster.
   // Boş satır hiç gösterilmez; Fiyat her zaman en altta.
@@ -93,28 +100,17 @@ export default async function ProductPage({ params }: Params) {
   };
 
   return (
-    <main className="min-h-screen bg-[#0a0a0a] text-[#E3E3DB] antialiased selection:bg-[#0243C7] selection:text-[#E3E3DB]">
+    <main className="min-h-screen bg-[#0a0a0a] text-[#E3E3DB] antialiased overflow-x-hidden selection:bg-[#0243C7] selection:text-[#E3E3DB]">
       <JsonLd data={yapilandirilmisVeri} />
 
-      {/* Üst bar */}
-      <div className="border-b border-white/[0.06]">
-        <div className="max-w-[1600px] mx-auto px-6 md:px-12 py-6 flex items-center justify-between">
-          <Link
-            href="/"
-            className="text-[#E3E3DB] text-lg font-semibold tracking-[0.25em] uppercase"
-          >
-            SÜSEL<span className="text-[#0243C7]">İ</span>
-          </Link>
-          <Link
-            href={`/kategori/${product.categorySlug}`}
-            className="text-[#E3E3DB]/60 hover:text-[#E3E3DB] text-xs tracking-[0.25em] uppercase transition-colors"
-          >
-            ← {product.category || "Koleksiyon"}
-          </Link>
-        </div>
-      </div>
+      {/* Üst bar: ana sayfa ve kategori sayfalarıyla aynı (logo + Randevu). */}
+      <TopBar
+        whatsapp={settings.whatsapp}
+        backHref={product.categorySlug ? `/kategori/${product.categorySlug}` : "/"}
+        backLabel={product.category || "Koleksiyon"}
+      />
 
-      <div className="max-w-[1600px] mx-auto px-6 md:px-12 py-16 md:py-24">
+      <div className="max-w-[1600px] mx-auto px-6 md:px-12 pt-28 pb-16 md:pt-36 md:pb-24">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20">
           {/* Görseller */}
           <div className="space-y-4">
@@ -211,6 +207,9 @@ export default async function ProductPage({ params }: Params) {
           </div>
         </div>
       </div>
+
+      <DigerParcalar products={digerleri} title={product.category || "Koleksiyon"} />
+      <BottomCTA whatsapp={settings.whatsapp} />
     </main>
   );
 }
