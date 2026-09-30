@@ -889,6 +889,69 @@ function About() {
 // ============================================================
 // WhatsApp CTA
 // ============================================================
+// ── Sık sorulan sorular ──────────────────────────────────────────────────
+// Cevaplar kullanıcının verdiği bilgilerden (claude/is-bilgileri.md).
+// Bilgi değişirse (ör. Bursa dışı gönderim başlarsa) burası güncellenmeli.
+const SSS: { q: string; a: string }[] = [
+  { q: "Hazır ürününüz var mı?", a: "Hayır. Her parçayı sipariş üzerine, kullanılacağı mekâna göre atölyemizde üretiyoruz." },
+  { q: "Ölçü ve rengi değiştirebilir miyim?", a: "Evet. Ölçüyü mekânınıza göre uyarlıyoruz. Cam parçalarda farklı renk seçeneklerini folyo uygulamasıyla sağlıyoruz." },
+  { q: "Teslim ne kadar sürer?", a: "Sipariş onayından sonra üretim ve teslim genellikle 3–4 hafta sürer." },
+  { q: "Fiyatlar neden sitede yok?", a: "Her parça ölçüye ve renge göre üretildiği için fiyatı talebinize göre hazırlıyoruz. WhatsApp'tan ölçü ve renk tercihinizi yazmanız yeterli." },
+  { q: "Bursa dışına gönderim yapıyor musunuz?", a: "Şimdilik yalnızca Bursa içine teslimat yapıyoruz." },
+  { q: "Teslimat ücretli mi?", a: "Bursa içinde teslimat fiyata dahildir. Parçayı kapınıza kadar getiriyoruz." },
+  { q: "Montaj yapıyor musunuz?", a: "Evet, Bursa içinde montaj hizmeti veriyoruz. Montaj ayrıca ücretlendirilir." },
+  { q: "Ödemeyi nasıl yapabilirim?", a: "Siparişte %50 kapora alıyoruz, kalan tutarı teslimatta ödüyorsunuz. Kart, havale ya da nakit ile ödeyebilirsiniz. Şu an taksit seçeneğimiz bulunmuyor." },
+  { q: "Cam parçaların bakımı nasıl yapılır?", a: "Yumuşak bir bez ve cam temizleyiciyle silmeniz yeterli. Sıcak kapları doğrudan cama koymayın, altlık kullanın." },
+];
+
+function Faq() {
+  const ref = useRef(null);
+  const inView = useInView(ref, { once: true, amount: 0.15 });
+
+  return (
+    <section id="sss" ref={ref} className="relative py-28 md:py-40 bg-[#0a0a0a]">
+      <div className="max-w-[1600px] mx-auto px-6 md:px-12 grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={inView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.9, ease: [0.22, 1, 0.36, 1] }}
+          className="lg:col-span-4 lg:sticky lg:top-28 lg:self-start"
+        >
+          <div className="flex items-center gap-3 mb-6">
+            <span className="w-12 h-px bg-[#0243C7]" />
+            <span className="text-[#E3E3DB]/50 text-xs tracking-[0.4em] uppercase">SSS</span>
+          </div>
+          <h2 className="text-[#E3E3DB] text-4xl md:text-6xl font-light tracking-[-0.03em] leading-[1] mb-6">
+            Sık sorulan
+            <br />
+            <span className="italic text-[#E3E3DB]/40">sorular.</span>
+          </h2>
+          <p className="text-[#E3E3DB]/60 text-base font-light leading-relaxed max-w-sm">
+            Aradığınız cevap burada yoksa bize WhatsApp&apos;tan yazın.
+          </p>
+        </motion.div>
+
+        <div className="lg:col-span-8 border-t border-white/[0.08]">
+          {SSS.map((item) => (
+            <details key={item.q} className="group border-b border-white/[0.08]">
+              <summary className="flex items-center justify-between gap-6 py-6 md:py-7 cursor-pointer list-none [&::-webkit-details-marker]:hidden text-[#E3E3DB] text-lg md:text-xl font-light hover:text-white transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-[#0243C7] focus-visible:outline-offset-4 rounded-sm">
+                {item.q}
+                <span className="relative flex-none w-8 h-8 rounded-full border border-[#E3E3DB]/15 group-open:bg-[#0243C7] group-open:border-[#0243C7] transition-colors" aria-hidden="true">
+                  <span className="absolute left-1/2 top-1/2 w-3 h-px bg-[#E3E3DB] -translate-x-1/2 -translate-y-1/2" />
+                  <span className="absolute left-1/2 top-1/2 w-px h-3 bg-[#E3E3DB] -translate-x-1/2 -translate-y-1/2 group-open:scale-y-0 transition-transform duration-300" />
+                </span>
+              </summary>
+              <p className="pb-7 pr-14 text-[#E3E3DB]/60 text-base font-light leading-relaxed max-w-2xl">
+                {item.a}
+              </p>
+            </details>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
 function WhatsAppCTA({ whatsapp, email }: { whatsapp: string; email: string }) {
   const ref = useRef(null);
   const inView = useInView(ref, { once: true, amount: 0.3 });
@@ -1174,6 +1237,7 @@ function Footer({
               {[
                 { label: "Hakkımızda", href: "#stüdyo" },
                 { label: "Galeri", href: "#galeri" },
+                { label: "SSS", href: "#sss" },
                 { label: "İletişim", href: "#iletişim" },
               ].map((c) => (
                 <li key={c.label}>
@@ -1308,6 +1372,7 @@ export default function HomeClient({
       <Featured products={featured} />
       <Gallery />
       <About />
+      <Faq />
       <WhatsAppCTA whatsapp={settings.whatsapp} email={settings.email} />
       <Instagram instagram={settings.instagram} />
       <Footer
