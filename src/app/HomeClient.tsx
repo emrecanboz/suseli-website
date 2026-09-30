@@ -1255,8 +1255,27 @@ function Footer({
             </div>
             <div className="space-y-3 text-[#E3E3DB]/80 text-sm font-light">
               <div>{address}</div>
-              <div className="pt-3">+{whatsapp}</div>
-              {email && <div>{email}</div>}
+              {/* Eskiden düz yazıydı, tıklanınca bir şey olmuyordu. */}
+              <div className="pt-3">
+                <a
+                  href={`https://wa.me/${whatsapp}`}
+                  className="hover:text-[#E3E3DB] underline-offset-4 hover:underline transition-colors"
+                >
+                  {/^90\d{10}$/.test(whatsapp)
+                    ? `+90 ${whatsapp.slice(2, 5)} ${whatsapp.slice(5, 8)} ${whatsapp.slice(8, 10)} ${whatsapp.slice(10)}`
+                    : `+${whatsapp}`}
+                </a>
+              </div>
+              {email && (
+                <div>
+                  <a
+                    href={`mailto:${email}`}
+                    className="hover:text-[#E3E3DB] underline-offset-4 hover:underline transition-colors"
+                  >
+                    {email}
+                  </a>
+                </div>
+              )}
             </div>
           </div>
         </div>
