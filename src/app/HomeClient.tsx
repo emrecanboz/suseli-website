@@ -1276,6 +1276,18 @@ function Footer({
                   </a>
                 </div>
               )}
+              {/* Google İşletme Profili yorum linki (1 Ekim 2026). */}
+              <div className="pt-3">
+                <a
+                  href="https://g.page/r/CV_sPKKJMu-KEBM/review"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-2 text-[#E3E3DB] hover:text-white underline-offset-4 hover:underline transition-colors"
+                >
+                  <span aria-hidden="true" className="text-[#0243C7]">★</span>
+                  Google&apos;da değerlendirin
+                </a>
+              </div>
             </div>
           </div>
         </div>
