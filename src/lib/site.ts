@@ -13,8 +13,11 @@ export const SITE_URL = (
 
 export const SITE_NAME = "SÜSELİ Creative Studio";
 
+// Google'da "Bursa cam mobilya / ayna" aramaları için (kullanıcı onayı, 2 Ekim 2026).
+export const SITE_TITLE = "SÜSELİ Creative Studio | Bursa Cam Mobilya ve Ayna";
+
 export const SITE_DESCRIPTION =
-  "Bursa merkezli yaratıcı stüdyo. Yemek masası, orta sehpa, dekorasyon, ayna ve özel tasarım projeleri.";
+  "Bursa'da cam mobilya ve ayna atölyesi. Cam yemek masası, orta sehpa ve aynayı özel ölçüde, sipariş üzerine üretiyoruz. Bursa içi kapıya teslim.";
 
 /** Kategori slug'ları — src/app/kategori/[slug]/page.tsx içindeki CATEGORY_META ile aynı. */
 export const CATEGORY_SLUGS = [

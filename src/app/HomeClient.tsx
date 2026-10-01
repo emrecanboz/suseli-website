@@ -196,7 +196,7 @@ function Hero({ title, subtitle }: { title: string; subtitle: string }) {
         >
           <span className="w-12 h-px bg-[#0243C7]" />
           <span className="text-[#E3E3DB]/60 text-xs md:text-sm tracking-[0.4em] uppercase">
-            Bursa · Atölye · 2023
+            Bursa · Cam mobilya ve ayna atölyesi
           </span>
         </motion.div>
 
@@ -872,7 +872,7 @@ function About() {
               className="space-y-5 text-[#2B2B2B]/80 text-base md:text-lg leading-relaxed font-light max-w-2xl"
             >
               <p>
-                SÜSELİ, 2023 yılında Bursa’da kurulan; mimari oranların; camın, aynanın ve ahşabın diliyle konuşan bir yaratıcı stüdyodur. Her bir parça, atölyemizde ustalarımızın elleriyle tasarlanır ve üretilir.
+                SÜSELİ, 2023 yılında Bursa’da kurulan bir cam mobilya ve ayna atölyesidir. Her bir parça, atölyemizde ustalarımızın elleriyle tasarlanır ve üretilir.
               </p>
               <p>
                 Tasarım anlayışımız; geçici eğilimlerden uzak, zamansız bir estetiği hedefler. Mekânın ihtiyaç duyduğu sessizliği yakalayan, ölçülü ve heykelsi parçalar üretiyoruz.
