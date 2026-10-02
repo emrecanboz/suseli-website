@@ -120,8 +120,7 @@ export const FALLBACK_CATEGORIES: CategoryItem[] = [
     subtitle: "04 — Işık ve Yansıma",
     description:
       "Mimari oranlara göre tasarlanan, çerçevesiz ve heykelsi ayna koleksiyonu.",
-    image:
-      "/gorseller/kat-ayna.jpg",
+    image: "/urun/yanki-kapak.jpg",
   },
   {
     id: "tasarim",
@@ -221,6 +220,42 @@ export const FALLBACK_PRODUCTS: ProductItem[] = [
         value:
           "Yumuşak bez ve cam temizleyiciyle silinir. Sıcak kapları doğrudan cama koymayın.",
       },
+    ],
+  },
+  {
+    // YANKI — gerçek ürün (sonsuzluk aynası). Metin ve teknik bilgiler
+    // kullanıcıdan, onaylı (2 Ekim 2026). Görsel: atölye fotoğrafından
+    // Leonardo AI ile mekân içine yerleştirildi → "Tasarım görseli".
+    // Gerçekte ön cam bronz tonlu; final (RGB) çekim gelince isRender false.
+    id: "koleksiyon-yanki",
+    slug: "yanki",
+    title: "YANKI",
+    category: "Ayna",
+    categorySlug: "ayna",
+    description:
+      "Bronz reflekte camın ardında ışık katman katman çoğalır ve derinleşir. Yalnızca 8 santimetrelik bir kasanın içinde, duvarın ötesine uzanan bir koridor açılır.\n\nIşık kapalıyken sıcak tonlu bir bronz ayna, açıkken mekânın odak noktası. Rengini kumandadan ya da telefondan değiştirebilirsiniz. Yere dayanabilir, duvara da asılabilir.",
+    image: "/urun/yanki.jpg",
+    images: ["/urun/yanki.jpg"],
+    isRender: true,
+    price: "",
+    materials: "Önde 4 mm bronz reflekte cam, arkada 3 mm ayna",
+    dimensions: "180 × 70 cm · Derinlik 8 cm",
+    specs: [
+      { label: "Ölçüler", value: "180 × 70 cm · Derinlik 8 cm" },
+      {
+        label: "Malzeme",
+        value: "Önde 4 mm bronz reflekte cam, arkada 3 mm ayna, arada alüminyum LED kanalları",
+      },
+      { label: "Kasa", value: "MDF" },
+      { label: "Işık", value: "RGB LED · Kumanda ve telefondan kontrol" },
+      { label: "Elektrik", value: "Fişe takılır" },
+      { label: "Kullanım", value: "Yere dayalı ya da duvara asılı" },
+      { label: "Özel üretim", value: "İstenilen ölçüde üretilir" },
+      {
+        label: "Teslim süresi",
+        value: "3–4 hafta (atölye yoğunluğuna göre daha erken olabilir)",
+      },
+      { label: "Bakım", value: "Yumuşak bez ve cam temizleyiciyle silinir." },
     ],
   },
   {
@@ -361,4 +396,4 @@ export const FALLBACK_PRODUCTS: ProductItem[] = [
 ];
 
 /** Ana sayfada öne çıkan yedek parçalar — her kategoriden biri. */
-export const FALLBACK_FEATURED_SLUGS = ["sekiz", "aks", "katman", "ufuk", "menzil"];
+export const FALLBACK_FEATURED_SLUGS = ["sekiz", "yanki", "aks", "katman", "ufuk"];
