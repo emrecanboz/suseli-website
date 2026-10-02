@@ -238,14 +238,13 @@ export const FALLBACK_PRODUCTS: ProductItem[] = [
     images: ["/urun/yanki.jpg"],
     isRender: true,
     price: "",
-    materials: "Önde 4 mm bronz reflekte cam, arkada 3 mm ayna",
+    materials: "Bronz cam, ayna ve LED ışık",
     dimensions: "180 × 70 cm · Derinlik 8 cm",
     specs: [
       { label: "Ölçüler", value: "180 × 70 cm · Derinlik 8 cm" },
-      {
-        label: "Malzeme",
-        value: "Önde 4 mm bronz reflekte cam, arkada 3 mm ayna, arada alüminyum LED kanalları",
-      },
+      // Kullanıcı isteği: üretim katmanları (cam/ayna kalınlıkları, LED
+      // kanalları) sitede anlatılmıyor, sadece malzemeler yazıyor.
+      { label: "Malzeme", value: "Bronz cam, ayna ve LED ışık" },
       { label: "Kasa", value: "MDF" },
       { label: "Işık", value: "RGB LED · Kumanda ve telefondan kontrol" },
       { label: "Elektrik", value: "Fişe takılır" },
