@@ -47,6 +47,12 @@ export interface ProductItem {
   image: string | null;
   images: string[];
   /**
+   * İsteğe bağlı kısa, sessiz, döngüde oynayan video (4:5). Ürün
+   * sayfasında görsellerin üstünde gösterilir.
+   */
+  video?: string;
+  videoPoster?: string;
+  /**
    * Görseller gerçek fotoğraf değil, bilgisayarda üretilmiş tasarım
    * görseliyse true olur. Sitede görselin yanında açıkça belirtilir —
    * render'ı fotoğraf gibi sunmayız.
@@ -224,9 +230,9 @@ export const FALLBACK_PRODUCTS: ProductItem[] = [
   },
   {
     // YANKI — gerçek ürün (sonsuzluk aynası). Metin ve teknik bilgiler
-    // kullanıcıdan, onaylı (2 Ekim 2026). Görsel: atölye fotoğrafından
-    // Leonardo AI ile mekân içine yerleştirildi → "Tasarım görseli".
-    // Gerçekte ön cam bronz tonlu; final (RGB) çekim gelince isRender false.
+    // kullanıcıdan, onaylı (2 Ekim 2026). Görseller gerçek çekim (5 Ekim):
+    // 4K videodan seçilen kareler + titremesi alınmış döngü video.
+    // Leonardo görseli (yanki-kapak.jpg) sadece Ayna kategori kapağında.
     id: "koleksiyon-yanki",
     slug: "yanki",
     title: "YANKI",
@@ -234,9 +240,16 @@ export const FALLBACK_PRODUCTS: ProductItem[] = [
     categorySlug: "ayna",
     description:
       "Bronz reflekte camın ardında ışık katman katman çoğalır ve derinleşir. Yalnızca 8 santimetrelik bir kasanın içinde, duvarın ötesine uzanan bir koridor açılır.\n\nIşık kapalıyken sıcak tonlu bir bronz ayna, açıkken mekânın odak noktası. Rengini kumandadan ya da telefondan değiştirebilirsiniz. Yere dayanabilir, duvara da asılabilir.",
-    image: "/urun/yanki.jpg",
-    images: ["/urun/yanki.jpg"],
-    isRender: true,
+    image: "/urun/yanki-1.jpg",
+    images: [
+      "/urun/yanki-1.jpg",
+      "/urun/yanki-2.jpg",
+      "/urun/yanki-3.jpg",
+      "/urun/yanki-4.jpg",
+    ],
+    video: "/urun/yanki.mp4",
+    videoPoster: "/urun/yanki-poster.jpg",
+    isRender: false,
     price: "",
     materials: "Bronz cam, ayna ve LED ışık",
     dimensions: "180 × 70 cm · Derinlik 8 cm",

@@ -120,6 +120,25 @@ export default async function ProductPage({ params }: Params) {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20">
           {/* Görseller */}
           <div className="space-y-4">
+            {/* Kısa döngü video (varsa): sessiz, otomatik, kontrolsüz. */}
+            {product.video && (
+              <div className="relative w-full aspect-[4/5] rounded-2xl overflow-hidden bg-[#0a0a0a]">
+                <video
+                  poster={product.videoPoster}
+                  autoPlay
+                  muted
+                  loop
+                  playsInline
+                  preload="metadata"
+                  aria-label={`${product.title} — ışık renkleri değişirken`}
+                  className="absolute inset-0 h-full w-full object-cover"
+                >
+                  {/* WebM (VP9) önce: H.264 çalmayan tarayıcılar için. */}
+                  <source src={product.video.replace(/\.mp4$/, ".webm")} type="video/webm" />
+                  <source src={product.video} type="video/mp4" />
+                </video>
+              </div>
+            )}
             {product.images.length > 0 ? (
               product.images.map((src, i) => (
                 <div
