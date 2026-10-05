@@ -145,6 +145,53 @@ function Navigation({
 // ============================================================
 // Hero Section
 // ============================================================
+// ── Hero arka plan videosu (YANKI) ─────────────────────────────────────
+// Bilgisayarda yatay, telefonda dikey video. Video yüklenene kadar (ve
+// hareketi azalt tercihi olanlarda her zaman) aynı videonun ilk karesi
+// sabit görsel olarak görünür.
+function HeroVideo() {
+  const [src, setSrc] = useState<string | null>(null);
+  const [oynuyor, setOynuyor] = useState(false);
+
+  useEffect(() => {
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    const yatay = window.matchMedia("(min-width: 768px)").matches;
+    setSrc(yatay ? "/video/hero-yatay" : "/video/hero-dikey");
+  }, []);
+
+  return (
+    <>
+      <picture>
+        <source media="(min-width: 768px)" srcSet="/video/hero-yatay-poster.jpg" />
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img
+          src="/video/hero-dikey-poster.jpg"
+          alt=""
+          fetchPriority="high"
+          className="absolute inset-0 h-full w-full object-cover md:left-[18%] brightness-125"
+        />
+      </picture>
+      {src && (
+        <video
+          key={src}
+          autoPlay
+          muted
+          loop
+          playsInline
+          preload="auto"
+          onPlaying={() => setOynuyor(true)}
+          className={`absolute inset-0 h-full w-full object-cover md:left-[18%] brightness-125 transition-opacity duration-1000 ${
+            oynuyor ? "opacity-100" : "opacity-0"
+          }`}
+        >
+          <source src={`${src}.webm`} type="video/webm" />
+          <source src={`${src}.mp4`} type="video/mp4" />
+        </video>
+      )}
+    </>
+  );
+}
+
 function Hero({ title, subtitle }: { title: string; subtitle: string }) {
   const containerRef = useRef<HTMLDivElement>(null);
   const { scrollYProgress } = useScroll({
@@ -162,19 +209,14 @@ function Hero({ title, subtitle }: { title: string; subtitle: string }) {
   return (
     <section
       ref={containerRef}
-      className="relative h-screen w-full overflow-hidden bg-[#1a1a1a]"
+      className="relative h-screen w-full overflow-hidden bg-[#050506]"
     >
       <motion.div style={{ scale }} className="absolute inset-0">
-        <Image
-          src="/gorseller/hero.jpg"
-          alt=""
-          fill
-          priority
-          sizes="100vw"
-          className="object-cover"
-        />
-        <div className="absolute inset-0 bg-gradient-to-b from-[#0a0a0a]/70 via-[#0a0a0a]/30 to-[#0a0a0a]" />
-        <div className="absolute inset-0 bg-gradient-to-r from-[#0a0a0a]/60 via-transparent to-[#0a0a0a]/40" />
+        <HeroVideo />
+        {/* Video koyu olduğu için katmanlar hafif: üstte menü, altta bir
+            sonraki bölüme geçiş, solda yazı okunurluğu. */}
+        <div className="absolute inset-0 bg-gradient-to-b from-[#050506]/60 via-transparent to-[#0a0a0a]" />
+        <div className="absolute inset-0 bg-gradient-to-r from-[#050506]/85 via-[#050506]/25 to-transparent" />
       </motion.div>
 
       {/* Animated grid lines */}
