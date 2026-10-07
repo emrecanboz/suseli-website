@@ -239,7 +239,7 @@ export const FALLBACK_PRODUCTS: ProductItem[] = [
     category: "Ayna",
     categorySlug: "ayna",
     description:
-      "Bronz reflekte camın ardında ışık katman katman çoğalır ve derinleşir. Yalnızca 8 santimetrelik bir kasanın içinde, duvarın ötesine uzanan bir koridor açılır.\n\nIşık kapalıyken sıcak tonlu bir bronz ayna, açıkken mekânın odak noktası. Rengini kumandadan ya da telefondan değiştirebilirsiniz. Yere dayanabilir, duvara da asılabilir.",
+      "Işık açıldığında ayna derinleşir; çerçevenin içinde katman katman ilerleyen bir koridor belirir. Önünden geçtikçe derinlik de sizinle birlikte kayar, duvar sanki arkaya doğru açılır.\n\nIşık kapalıyken boy aynası olarak kullanılır; açıldığında salonun, girişin ya da yatak odasının odak noktası olur. Rengini kumandadan ya da telefondan seçersiniz: akşam sıcak bir tonda, misafir geldiğinde canlı renklerde.",
     image: "/urun/yanki-1.jpg",
     images: [
       "/urun/yanki-1.jpg",
@@ -251,14 +251,12 @@ export const FALLBACK_PRODUCTS: ProductItem[] = [
     videoPoster: "/urun/yanki-poster.jpg",
     isRender: false,
     price: "",
-    materials: "Bronz cam, ayna ve LED ışık",
+    // Kullanıcı isteği (7 Ekim): yapım ipucu veren Malzeme/Kasa yok;
+    // boş bırakılınca Google bilgilerine de malzeme yazılmaz.
+    materials: "",
     dimensions: "180 × 70 cm · Derinlik 8 cm",
     specs: [
       { label: "Ölçüler", value: "180 × 70 cm · Derinlik 8 cm" },
-      // Kullanıcı isteği: üretim katmanları (cam/ayna kalınlıkları, LED
-      // kanalları) sitede anlatılmıyor, sadece malzemeler yazıyor.
-      { label: "Malzeme", value: "Bronz cam, ayna ve LED ışık" },
-      { label: "Kasa", value: "MDF" },
       { label: "Işık", value: "RGB LED · Kumanda ve telefondan kontrol" },
       { label: "Elektrik", value: "Fişe takılır" },
       { label: "Kullanım", value: "Yere dayalı ya da duvara asılı" },
