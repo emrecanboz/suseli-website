@@ -239,7 +239,7 @@ export const FALLBACK_PRODUCTS: ProductItem[] = [
     category: "Ayna",
     categorySlug: "ayna",
     description:
-      "Işık açıldığında ayna derinleşir; çerçevenin içinde katman katman ilerleyen bir koridor belirir. Önünden geçtikçe derinlik de sizinle birlikte kayar, duvar sanki arkaya doğru açılır.\n\nIşık kapalıyken boy aynası olarak kullanılır; açıldığında salonun, girişin ya da yatak odasının odak noktası olur. Rengini kumandadan ya da telefondan seçersiniz: akşam sıcak bir tonda, misafir geldiğinde canlı renklerde.",
+      "Işık açıldığında ayna derinleşir; çerçevenin içinde katman katman ilerleyen bir koridor belirir. Önünden geçtikçe derinlik de sizinle birlikte kayar, duvar sanki arkaya doğru açılır.\n\nIşık kapalıyken boy aynası olarak kullanılır; açıldığında salonun, girişin ya da yatak odasının odak noktası olur. Rengini dilediğiniz an değiştirirsiniz: akşam sıcak bir tonda, misafir geldiğinde canlı renklerde.",
     image: "/urun/yanki-1.jpg",
     images: [
       "/urun/yanki-1.jpg",
@@ -257,7 +257,7 @@ export const FALLBACK_PRODUCTS: ProductItem[] = [
     dimensions: "180 × 70 cm · Derinlik 8 cm",
     specs: [
       { label: "Ölçüler", value: "180 × 70 cm · Derinlik 8 cm" },
-      { label: "Işık", value: "RGB LED · Kumanda ve telefondan kontrol" },
+      { label: "Işık", value: "RGB LED · Renk ve ton ayarlanabilir" },
       { label: "Elektrik", value: "Fişe takılır" },
       { label: "Kullanım", value: "Yere dayalı ya da duvara asılı" },
       { label: "Özel üretim", value: "İstenilen ölçüde üretilir" },
