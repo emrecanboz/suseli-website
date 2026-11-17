@@ -4,6 +4,7 @@ import { SITE_DESCRIPTION, SITE_NAME, SITE_TITLE, SITE_URL } from "@/lib/site";
 import "./globals.css";
 import Analitik from "./Analitik";
 import SmoothScroll from "./SmoothScroll";
+import PlakCalar from "./PlakCalar";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -84,6 +85,7 @@ export default function RootLayout({
       <body className="min-h-full flex flex-col">
         <SmoothScroll />
         {children}
+        <PlakCalar />
         <Analitik />
       </body>
     </html>
