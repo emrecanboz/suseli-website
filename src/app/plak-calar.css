@@ -42,6 +42,8 @@
   transition: transform 0.5s var(--pc-egri), width 0.4s var(--pc-egri), opacity 0.6s;
 }
 .pc-sekme:hover { width: 84px; }
+/* masaüstünde ana sayfadaki "N° 2026 · KIŞ KOLEKSİYONU" yazısının altına iner */
+@media (min-width: 768px) { .pc-sekme { top: calc(env(safe-area-inset-top, 0px) + 132px); } }
 .pc-sekme .pc-mini { position: relative; width: 40px; height: 40px; flex: 0 0 40px; }
 .pc-sekme .pc-mini .pc-orta { inset: 31%; }
 /* minik plağın etiketinde kısa bir "yazı" çizgisi: dönüş gözle görülsün */
