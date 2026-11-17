@@ -174,7 +174,7 @@
 .pc-raf-ust span { font-size: 11px; letter-spacing: 0.3em; }
 .pc-raf-ust small { font-family: var(--pc-mono); font-size: 11px; color: var(--pc-soluk); }
 .pc-raf { display: flex; gap: 14px; overflow-x: auto; padding: 22px 2px 12px; margin-top: -16px; scroll-snap-type: x mandatory; user-select: none; -webkit-user-select: none; scrollbar-width: thin; scrollbar-color: #333 transparent; }
-.pc-kapak { position: relative; flex: 0 0 108px; width: 108px; height: 108px; padding: 0; border: 0; background: none; cursor: grab; scroll-snap-align: start; touch-action: pan-x; }
+.pc-kapak { position: relative; flex: 0 0 108px; width: 108px; height: 108px; padding: 0; border: 0; background: none; cursor: grab; scroll-snap-align: start; touch-action: manipulation; }
 .pc-kapak:active { cursor: grabbing; }
 .pc-kapak .pc-vinil { left: 8%; top: 4%; width: 84%; height: 84%; transition: transform 0.45s var(--pc-egri), opacity 0.3s; }
 .pc-kapak:hover .pc-vinil, .pc-kapak:focus-visible .pc-vinil { transform: translateY(-17%); }
@@ -203,5 +203,22 @@
   -webkit-mask: radial-gradient(circle at 50% 36%, #000 0 30%, transparent 62%); mask: radial-gradient(circle at 50% 36%, #000 0 30%, transparent 62%);
 }
 .pc-ipucu { margin: 0; font-size: 12px; line-height: 1.6; color: var(--pc-soluk); }
-@media (max-width: 480px) { .pc-kapak { flex-basis: 96px; width: 96px; height: 96px; } }
 @media (prefers-reduced-motion: reduce) { .pc-panel, .pc-panel > *, .pc-sekme, .pc-perde { transition: none !important; } }
+
+/* telefon: her şey tek ekrana sığsın, raf görünür kalsın */
+@media (max-width: 600px) {
+  .pc-panel { gap: 14px; padding-top: calc(env(safe-area-inset-top, 0px) + 14px); padding-bottom: calc(env(safe-area-inset-bottom, 0px) + 18px); }
+  .pc-calar { width: min(100%, 300px); align-self: center; }
+  .pc-calan h2 { font-size: 1.2rem; }
+  .pc-sure { margin-top: 4px; }
+  .pc-oynat { width: 46px; height: 46px; flex-basis: 46px; }
+  .pc-cikar { height: 36px; }
+  .pc-raf-ust { padding-top: 14px; }
+  .pc-raf { padding-top: 20px; }
+  .pc-kapak { flex-basis: 92px; width: 92px; height: 92px; }
+  .pc-ipucu { display: none; }
+}
+@media (max-width: 600px) and (max-height: 700px) {
+  .pc-calar { width: min(100%, 250px); }
+  .pc-panel { gap: 12px; }
+}
